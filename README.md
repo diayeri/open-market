@@ -38,6 +38,57 @@
 6. **주문/결제 페이지**
    - 결제 정보 입력 및 주문을 확정하는 페이지
 
+#### 프로젝트 구조
+
+```
+/open-market
+│
+├── /public                # 정적 파일 (이미지, 아이콘, 폰트 등)
+│   ├── favicon.ico
+│   └── ...                # 기타 정적 파일
+│
+├── /src                   # 소스 코드
+│   ├── /assets            # 정적 리소스 (CSS, JS, 이미지 등)
+│   │   ├── /css
+│   │   │   ├── main.css
+│   │   │   └── styles.css
+│   │   ├── /js
+│   │   │   ├── main.js
+│   │   │   └── util.js
+│   │   └── /img
+│   │       ├── logo.png
+│   │       └── banner.jpg
+│   │
+│   ├── /pages             # 각 페이지의 HTML 파일
+│   │   ├── index.html     # 로그인 페이지
+│   │   ├── signup.html    # 회원 가입 페이지
+│   │   ├── products.html  # 상품 목록 페이지
+│   │   ├── product-detail.html # 상품 상세 페이지
+│   │   ├── cart.html      # 장바구니 페이지
+│   │   ├── payment.html   # 결제 페이지
+│   │   └── error404.html  # 404 오류 페이지
+│   │
+│   ├── /components        # 재사용 가능한 HTML 조각 (템플릿)
+│   │   ├── header.html
+│   │   └── footer.html
+│   │
+│   └── /scripts           # 각 페이지별 JavaScript 파일
+│       ├── index.js       # 로그인 페이지 관련 JS
+│       ├── signup.js      # 회원 가입 페이지 관련 JS
+│       ├── products.js    # 상품 목록 페이지 관련 JS
+│       ├── product-detail.js # 상품 상세 페이지 관련 JS
+│       ├── cart.js        # 장바구니 페이지 관련 JS
+│       └── payment.js     # 결제 페이지 관련 JS
+│
+├── /dist                  # 빌드된 파일 (Vite 빌드 결과물)
+│
+├── package.json           # 프로젝트 설정 파일
+│
+├── vite.config.js         # Vite 설정 파일
+│
+└── README.md              # 프로젝트 설명서
+```
+
 #### 구현 예정 페이지
 
 1. **1차**: **구매자 페이지**
