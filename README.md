@@ -59,14 +59,13 @@
 │   │       ├── logo.png
 │   │       └── banner.jpg
 │   │
-│   ├── /pages             # 각 페이지의 HTML 파일
-│   │   ├── index.html     # 로그인 페이지
-│   │   ├── signup.html    # 회원 가입 페이지
-│   │   ├── products.html  # 상품 목록 페이지
-│   │   ├── product-detail.html # 상품 상세 페이지
-│   │   ├── cart.html      # 장바구니 페이지
-│   │   ├── payment.html   # 결제 페이지
-│   │   └── error404.html  # 404 오류 페이지
+│   ├── index.html     # 로그인 페이지 *
+│   ├── signup.html    # 회원 가입 페이지
+│   ├── products.html  # 상품 목록 페이지 *
+│   ├── product-detail.html # 상품 상세 페이지
+│   ├── cart.html      # 장바구니 페이지 *
+│   ├── payment.html   # 결제 페이지
+│   └── error404.html  # 404 오류 페이지
 │   │
 │   ├── /components        # 재사용 가능한 HTML 조각 (템플릿)
 │   │   ├── header.html
@@ -83,9 +82,7 @@
 ├── /dist                  # 빌드된 파일 (Vite 빌드 결과물)
 │
 ├── package.json           # 프로젝트 설정 파일
-│
 ├── vite.config.js         # Vite 설정 파일
-│
 └── README.md              # 프로젝트 설명서
 ```
 
