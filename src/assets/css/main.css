@@ -9,6 +9,7 @@
   --font-lg: 1.125rem; /* 18px */
   --font-xl: 1.5rem; /* 24px */
   --primary: #21bf48;
+  --error: #eb5757;
   --gray: #767676;
   --gray-light: #c4c4c4;
   --gray-lighter: #f2f2f2;
@@ -55,7 +56,7 @@
     width: 18px;
     height: 18px;
     background: #fff;
-    z-index: 2;
+    z-index: 1;
   }
   .tab-btn {
     flex: 1 0 auto;
@@ -66,13 +67,13 @@
     border: 1px solid var(--gray-light);
     background-color: var(--gray-lighter);
     border-bottom: 0;
-    z-index: -1;
     &.active {
       background-color: #fff;
       z-index: 1;
     }
   }
   + .tab-container {
+    position: relative;
     padding: 36px;
     background: #fff;
     border-radius: 10px;
@@ -89,4 +90,7 @@ input:focus {
   &::placeholder {
     color: var(--gray);
   }
+}
+.msg-error {
+  color: var(--error);
 }
