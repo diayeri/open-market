@@ -7,7 +7,6 @@ const $buyerId = document.querySelector("#buyerId");
 const $buyerPassword = document.querySelector("#buyerPassword");
 const $buyerLoginErr = document.querySelector("#buyerLoginErr");
 
-// 아이디 데이터 가져오기
 const login = async (id, pw, type) => {
   try {
     const res = await fetch(url + "/accounts/login/", {
@@ -34,8 +33,9 @@ $buyerLoginForm.addEventListener("submit", async (e) => {
     const loginRes = await login(id, pw, "BUYER");
     if (loginRes.ok) {
       // 계정정보 일치
-      // history.back();
+      history.back();
       console.log(loginRes.data);
+      localStorage.setItem("login-token", loginRes.data.token);
     } else {
       // 계정정보 불일치
       $buyerLoginErr.classList.remove("hidden");
@@ -45,7 +45,7 @@ $buyerLoginForm.addEventListener("submit", async (e) => {
       $buyerPassword.focus();
     }
   } else {
-    // 미입력시, 경고문구 보이기
+    // id나 pw 미입력시
     $buyerLoginErr.classList.remove("hidden");
     // 입력되지 않은칸 포커싱
     if (!id) {
