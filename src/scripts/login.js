@@ -33,11 +33,16 @@ $buyerLoginForm.addEventListener("submit", async (e) => {
   if (id && pw) {
     const loginRes = await login(id, pw, "BUYER");
     if (loginRes.ok) {
-      // 성공 (계정정보 있음)
-      console.log("성공");
+      // 계정정보 일치
+      // history.back();
+      console.log(loginRes.data);
     } else {
-      // 실패
-      console.log("실패");
+      // 계정정보 불일치
+      $buyerLoginErr.classList.remove("hidden");
+      console.log(loginRes.data);
+      $buyerLoginErr.textContent = "아이디 또는 비밀번호가 일치하지 않습니다.";
+      $buyerPassword.value = null;
+      $buyerPassword.focus();
     }
   } else {
     // 미입력시, 경고문구 보이기
