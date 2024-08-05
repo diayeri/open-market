@@ -1,8 +1,48 @@
 @import url("./main.css");
 
-main {
+main,
+.cont {
   max-width: 1360px;
   padding: 0 40px;
+  margin: 0 auto;
+}
+
+header.sticky {
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 10;
+  background-color: #fff;
+  box-shadow: var(--shadow-header);
+  .cont {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+  }
+  .logo {
+    height: 38px;
+  }
+  .btn-header {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--font-xs);
+    color: var(--gray);
+  }
+  #search {
+    display: flex;
+    position: relative;
+    align-items: center;
+    width: 400px;
+    padding: 11px 68px 11px 20px;
+    border: 2px solid var(--primary);
+    border-radius: 100px;
+    &::placeholder {
+      color: var(--gray);
+    }
+  }
 }
 
 .auth-header {

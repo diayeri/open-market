@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="keyword" content="" />
+    <title>상품목록 | 오픈마켓</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="buyer-header sticky">
+      <div class="cont">
+        <a href="/">
+          <img src="./assets/img/Logo-hodu.png" alt="HODU" class="logo" />
+        </a>
+        <div class="relative flex items-center">
+          <label for="search" class="sr-only">상품 검색</label>
+          <input
+            type="text"
+            id="search"
+            placeholder="상품을 검색해보세요!"
+            class="ml-[30px]"
+          />
+          <button class="absolute right-5">
+            <img src="./assets/img/icon-search.svg" alt="search" />
+          </button>
+        </div>
+        <div class="ml-auto flex items-center gap-[26px]">
+          <a href="./cart.html" class="btn-header" id="cartBtn">
+            <img
+              src="./assets/img/icon-shopping-cart.svg"
+              alt=""
+              class="-ml-0.5"
+            />
+            장바구니
+          </a>
+          <a href="/" class="btn-header" id="mypageBtn">
+            <img src="./assets/img/icon-user.svg" alt="" />
+            마이페이지
+          </a>
+        </div>
+      </div>
+    </header>
+    <h1 class="sr-only">HODU 오픈마켓 상품목록</h1>
+    <main class="auth-main">
+      <article class="auth-container">
+        <h2 class="sr-only">로그인</h2>
+        <div class="tab">
+          <button type="button" class="tab-btn active" id="buyerLoginTab">
+            구매회원 로그인
+          </button>
+          <button type="button" class="tab-btn" id="sellerLoginTab">
+            판매회원 로그인
+          </button>
+        </div>
+        <div class="tab-container">
+          <form
+            action=""
+            method="post"
+            class="flex flex-col gap-1.5"
+            id="buyerLoginForm"
+          >
+            <label for="buyerId" class="sr-only">아이디</label>
+            <input
+              type="text"
+              class="input-underline"
+              id="buyerId"
+              placeholder="아이디"
+            />
+            <label for="buyerPassword" class="sr-only">비밀번호</label>
+            <input
+              type="password"
+              class="input-underline"
+              id="buyerPassword"
+              placeholder="비밀번호"
+            />
+            <p class="msg-error mt-[26px] -mb-[10px] hidden" id="buyerLoginErr">
+              아이디 또는 비밀번호가 일치하지 않습니다.
+            </p>
+            <button
+              type="submit"
+              class="btn btn-md btn-primary mt-9"
+              id="buyerLoginBtn"
+            >
+              로그인
+            </button>
+          </form>
+          <form
+            action=""
+            method="post"
+            class="flex flex-col gap-1.5 hidden"
+            id="sellerLoginForm"
+          >
+            <p class="msg-disabled mt-[10px] text-center">
+              판매회원 기능은 추후 추가예정입니다.
+            </p>
+          </form>
+        </div>
+      </article>
+      <div class="flex gap-[14px] mt-[30px]">
+        <a href="/" class="text-gray-dark">회원가입</a>|<a
+          href="/"
+          class="text-gray-dark"
+          >비밀번호 찾기</a
+        >
+      </div>
+    </main>
+    <script src="./scripts/login.js"></script>
+    <script>
+      console.log("Hello");
+    </script>
+  </body>
+</html>

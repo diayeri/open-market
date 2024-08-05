@@ -4,6 +4,7 @@
   font-family: "Spoqa Han Sans Neo", "sans-serif";
 }
 :root {
+  --font-xs: 0.725rem; /* 12px */
   --font-sm: 0.875rem; /* 14px */
   --font-base: 1rem; /* 16px */
   --font-lg: 1.125rem; /* 18px */
@@ -14,6 +15,7 @@
   --gray-light: #c4c4c4;
   --gray-lighter: #f2f2f2;
   --gray-dark: #333;
+  --shadow-header: 0 4px 5px 0 rgba(0, 0, 0, 0.1);
 }
 main {
   margin: 0 auto;
