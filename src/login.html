@@ -20,10 +20,10 @@
       <article class="auth-container">
         <h2 class="sr-only">로그인</h2>
         <div class="tab">
-          <button type="button" class="tab-btn active" id="buyerLogin">
+          <button type="button" class="tab-btn active" id="buyerLoginTab">
             구매회원 로그인
           </button>
-          <button type="button" class="tab-btn" id="sellerLogin">
+          <button type="button" class="tab-btn" id="sellerLoginTab">
             판매회원 로그인
           </button>
         </div>
@@ -58,6 +58,16 @@
             >
               로그인
             </button>
+          </form>
+          <form
+            action=""
+            method="post"
+            class="flex flex-col gap-1.5 hidden"
+            id="sellerLoginForm"
+          >
+            <p class="msg-disabled mt-[10px] text-center">
+              판매회원 기능은 추후 추가예정입니다.
+            </p>
           </form>
         </div>
       </article>

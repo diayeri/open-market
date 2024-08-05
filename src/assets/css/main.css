@@ -97,3 +97,6 @@ input:focus {
 .msg-error {
   color: var(--error);
 }
+.msg-disabled {
+  color: var(--gray);
+}
