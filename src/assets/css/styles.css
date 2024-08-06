@@ -71,3 +71,41 @@ header.sticky {
 
 .buyer-main {
 }
+
+.wrap-product-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 78px 70px;
+  margin-top: 80px;
+}
+
+.product-list {
+  img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--gray-light);
+  }
+  .wrap-text {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    gap: 10px;
+    .subt {
+      color: var(--gray);
+    }
+    .title {
+      font-size: var(--font-lg);
+    }
+    .price {
+      display: flex;
+      gap: 2px;
+      align-items: baseline;
+      p {
+        font-size: var(--font-xl);
+        font-weight: bold;
+      }
+    }
+  }
+}
