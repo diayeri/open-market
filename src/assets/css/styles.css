@@ -239,15 +239,12 @@ footer {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 20px 30px;
+    padding: 20px 20px 20px 30px;
     margin-bottom: 35px;
     border-radius: 10px;
     background-color: var(--gray-lighter);
     h3 {
       font-size: var(--font-lg);
-      &:last-child {
-        margin-right: 100px;
-      }
     }
   }
   .tfooter {
@@ -324,7 +321,7 @@ footer {
     }
   }
   .tbody {
-    .empty {
+    .cart-empty {
       text-align: center;
       margin: 200px 0;
       h3 {
@@ -337,5 +334,87 @@ footer {
         margin-top: 15px;
       }
     }
+    .cart-list {
+      li {
+        display: flex;
+        position: relative;
+        align-items: center;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        padding: 20px 20px 20px 30px;
+        .thumb {
+          width: 160px;
+          aspect-ratio: 1 / 1;
+          object-fit: cover;
+          margin-left: 40px;
+        }
+        .wrap-text {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          margin-left: 36px;
+          padding: 6px 0 16px 0;
+          align-self: stretch;
+          .subt,
+          .info {
+            font-size: var(--font-sm);
+            color: var(--gray);
+          }
+          .title {
+            font-size: var(--font-lg);
+          }
+          .price {
+            font-weight: bold;
+          }
+          .info {
+            margin-top: auto;
+          }
+        }
+        .price-total {
+          p {
+            color: var(--warning);
+            font-size: var(--font-lg);
+            font-weight: bold;
+            margin-bottom: 26px;
+          }
+          button {
+            width: 130px;
+          }
+        }
+        .btn-del {
+          position: absolute;
+          top: 0px;
+          right: 0px;
+          padding: 18px;
+        }
+      }
+    }
+  }
+}
+.counter {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--gray-light);
+  border-radius: 5px;
+  button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-color: var(--gray-light);
+    &:first-child {
+      border-right-width: 1px;
+    }
+    &:last-child {
+      border-left-width: 1px;
+    }
+  }
+  .num {
+    display: inline-flex;
+    width: 52px;
+    height: 50px;
+    padding: 10px;
+    text-align: center;
   }
 }
