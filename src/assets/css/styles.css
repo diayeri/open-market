@@ -14,10 +14,10 @@ header.sticky {
   z-index: 10;
   background-color: #fff;
   box-shadow: var(--shadow-header);
+  padding: 20px 0;
   .cont {
     display: flex;
     align-items: center;
-    padding: 20px 0;
   }
   .logo {
     height: 38px;
@@ -67,4 +67,7 @@ header.sticky {
 .auth-container {
   width: 550px;
   max-width: 100%;
+}
+
+.buyer-main {
 }

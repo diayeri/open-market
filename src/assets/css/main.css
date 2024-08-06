@@ -102,3 +102,41 @@ input:focus {
 .msg-disabled {
   color: var(--gray);
 }
+.carousel {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--gray-lighter);
+  height: 500px;
+  .btn-arrow {
+    position: absolute;
+    width: 60px;
+    height: 124px;
+    background-image: url(../img/icon-next-arrow.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    &.prev {
+      left: 30px;
+      transform: rotate(180deg);
+    }
+    &.next {
+      right: 30px;
+    }
+  }
+  .wrap-dots {
+    display: flex;
+    position: absolute;
+    bottom: 20px;
+    gap: 6px;
+  }
+  .btn-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 10px;
+    background-color: #fff;
+    &.active {
+      background-color: #000;
+    }
+  }
+}
