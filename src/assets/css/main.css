@@ -4,13 +4,14 @@
   font-family: "Spoqa Han Sans Neo", "sans-serif";
 }
 :root {
-  --font-xs: 0.725rem; /* 12px */
+  --font-xs: 0.75rem; /* 12px */
   --font-sm: 0.875rem; /* 14px */
   --font-base: 1rem; /* 16px */
   --font-lg: 1.125rem; /* 18px */
   --font-xl: 1.5rem; /* 24px */
+  --font-2xl: 2.25rem; /* 36px */
   --primary: #21bf48;
-  --error: #eb5757;
+  --warning: #eb5757;
   --gray: #767676;
   --gray-light: #c4c4c4;
   --gray-lighter: #f2f2f2;
@@ -23,6 +24,7 @@ main {
 .text-gray-dark {
   color: var(--gray-dark);
 }
+/* btn-base, ms */
 .btn {
   border-radius: 5px;
   border: 1px solid var(--gray-light);
@@ -31,11 +33,10 @@ main {
   color: #fff;
   background-color: var(--primary);
   border-color: var(--primary);
+  padding: 17px;
 }
 .btn-sm {
   padding: 10px 25px;
-}
-.btn-base {
 }
 .btn-md {
   font-size: var(--font-lg);
@@ -43,7 +44,10 @@ main {
   padding: 19px;
 }
 .btn-lg {
+  font-size: var(--font-xl);
   font-weight: bold;
+  min-width: 220px;
+  padding: 19px;
 }
 .btn-tab {
 }
@@ -60,7 +64,7 @@ input:focus {
   }
 }
 .msg-error {
-  color: var(--error);
+  color: var(--warning);
 }
 .msg-disabled {
   color: var(--gray);

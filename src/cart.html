@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="keyword" content="" />
+    <title>상품목록 | 오픈마켓</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
+  <body>
+    <header class="buyer-header sticky">
+      <div class="cont">
+        <a href="/">
+          <img src="./assets/img/Logo-hodu.png" alt="HODU" class="logo" />
+        </a>
+        <div class="relative flex items-center">
+          <label for="search" class="sr-only">상품 검색</label>
+          <input
+            type="text"
+            id="search"
+            placeholder="상품을 검색해보세요!"
+            class="ml-[30px]"
+          />
+          <button class="absolute right-5">
+            <img src="./assets/img/icon-search.svg" alt="search" />
+          </button>
+        </div>
+        <div class="ml-auto flex items-center gap-[26px]">
+          <a href="./cart.html" class="btn-header active" id="cartBtn">
+            <img
+              src="./assets/img/icon-shopping-cart-2.svg"
+              alt=""
+              class="-ml-0.5"
+            />
+            장바구니
+          </a>
+          <a href="/" class="btn-header" id="mypageBtn">
+            <img src="./assets/img/icon-user.svg" alt="" />
+            마이페이지
+          </a>
+        </div>
+      </div>
+    </header>
+    <h1 class="pt-[54px] pb-[52px]">장바구니</h1>
+    <main class="buyer-main">
+      <h2 class="sr-only">장바구니 상품목록</h2>
+      <section class="cart-table">
+        <div class="thead">
+          <label for="itemAll" class="wrap-checkbox">
+            <span class="sr-only">선택</span>
+            <input type="checkbox" name="item" id="itemAll" />
+          </label>
+          <h3>상품정보</h3>
+          <h3>수량</h3>
+          <h3>상품금액</h3>
+        </div>
+        <div class="tbody">
+          <!-- 상품이 없을 때 -->
+          <div class="empty">
+            <h3>장바구니에 담긴 상품이 없습니다.</h3>
+            <p>원하는 상품을 장바구니에 담아보세요!</p>
+          </div>
+          <!-- 상품 목록 있을 때 -->
+          <ul class="cart-list"></ul>
+        </div>
+        <div class="tfooter">
+          <div class="wrap">
+            <h3>총 상품금액</h3>
+            <div class="price">
+              <p>46,000</p>
+              <span>원</span>
+            </div>
+          </div>
+          <div class="wrap">
+            <h3>상품 할인</h3>
+            <div class="price">
+              <p>0</p>
+              <span>원</span>
+            </div>
+            <span class="icon"
+              ><img src="./assets/img/icon-minus-line.svg" alt=""
+            /></span>
+          </div>
+          <div class="wrap">
+            <h3>배송비</h3>
+            <div class="price">
+              <p>0</p>
+              <span>원</span>
+            </div>
+            <span class="icon"
+              ><img src="./assets/img/icon-plus-line.svg" alt=""
+            /></span>
+          </div>
+          <div class="wrap total">
+            <h3>결제 예정 금액</h3>
+            <div class="price">
+              <p>46,500</p>
+              <span>원</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="text-center mt-10">
+        <button type="submit" class="btn btn-primary btn-lg">주문하기</button>
+      </div>
+    </main>
+    <footer>
+      <div class="cont">
+        <div class="wrap-link">
+          <div class="wrap-policy">
+            <a href="">호두샵 소개</a>|<a href="">이용약관</a>|<a
+              href=""
+              class="font-bold"
+              >개인정보처리방침</a
+            >|<a href="">전자금융거래약관</a>|<a href="">청소년보호정책</a>|<a
+              href=""
+              >제휴문의</a
+            >
+          </div>
+          <div class="wrap-sns">
+            <a href="">
+              <img src="./assets/img/icon-insta.svg" alt="instagram" /> </a
+            ><a href="">
+              <img src="./assets/img/icon-fb.svg" alt="facebook" /> </a
+            ><a href="">
+              <img src="./assets/img/icon-yt.svg" alt="youtube" />
+            </a>
+          </div>
+        </div>
+        <p class="text">
+          <strong>(주)HODU SHOP</strong><br />
+          제주특별자치도 제주시 동광고 137 제주코딩베이스캠프<br />
+          사업자 번호 : 000-0000-0000 | 통신판매업 <br />대표 : 김호두
+        </p>
+      </div>
+    </footer>
+    <script src="./scripts/cart.js"></script>
+  </body>
+</html>
