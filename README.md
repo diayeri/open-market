@@ -52,30 +52,21 @@
 │   │   ├── /css
 │   │   │   ├── main.css
 │   │   │   └── styles.css
-│   │   ├── /js
-│   │   │   ├── main.js
-│   │   │   └── util.js
 │   │   └── /img
-│   │       ├── logo.png
-│   │       └── banner.jpg
 │   │
-│   ├── index.html     # 로그인 페이지 *
+│   ├── index.html     # 상품 목록 페이지 *
+│   ├── login.html     # 로그인 페이지 *
 │   ├── signup.html    # 회원 가입 페이지
-│   ├── products.html  # 상품 목록 페이지 *
-│   ├── product-detail.html # 상품 상세 페이지
+│   ├── product.html   # 상품 상세 페이지
 │   ├── cart.html      # 장바구니 페이지 *
 │   ├── payment.html   # 결제 페이지
 │   └── error404.html  # 404 오류 페이지
 │   │
-│   ├── /components        # 재사용 가능한 HTML 조각 (템플릿)
-│   │   ├── header.html
-│   │   └── footer.html
-│   │
 │   └── /scripts           # 각 페이지별 JavaScript 파일
-│       ├── index.js       # 로그인 페이지 관련 JS
+│       ├── index.js       # 상품 목록 페이지 관련 JS
+│       ├── login.js       # 로그인 페이지 관련 JS
 │       ├── signup.js      # 회원 가입 페이지 관련 JS
-│       ├── products.js    # 상품 목록 페이지 관련 JS
-│       ├── product-detail.js # 상품 상세 페이지 관련 JS
+│       ├── product.js     # 상품 상세 페이지 관련 JS
 │       ├── cart.js        # 장바구니 페이지 관련 JS
 │       └── payment.js     # 결제 페이지 관련 JS
 │
