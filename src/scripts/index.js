@@ -3,14 +3,12 @@ const fetchHeaders = { "Content-Type": "application/json" };
 
 // 상품목록 UI
 const addListUi = (e) => {
-  // const $li = document.createElement("li");
-  // $li.classList.add("product-list");
   e.price = e.price.toLocaleString();
 
   const $ul = document.querySelector(".product-list");
   const $li = `
     <li>
-      <a href="/${e.product_id}">
+      <a href="/product${e.product_id}">
         <img
           src="${e.image}"
           alt="${e.product_name}"
@@ -33,7 +31,7 @@ const addListUi = (e) => {
 const loadProducts = async () => {
   const res = await fetch(url + "/products");
   const products = await res.json();
-  console.log(products.results[0]);
+
   products.results.forEach((e) => {
     addListUi(e);
   });
