@@ -43,24 +43,12 @@
 ```
 /open-market
 │
-├── /public                # 정적 파일 (이미지, 아이콘, 폰트 등)
-│   ├── favicon.ico
-│   └── ...                # 기타 정적 파일
-│
 ├── /src                   # 소스 코드
 │   ├── /assets            # 정적 리소스 (CSS, JS, 이미지 등)
 │   │   ├── /css
 │   │   │   ├── main.css
 │   │   │   └── styles.css
 │   │   └── /img
-│   │
-│   ├── index.html     # 상품 목록 페이지 *
-│   ├── login.html     # 로그인 페이지 *
-│   ├── signup.html    # 회원 가입 페이지
-│   ├── product.html   # 상품 상세 페이지
-│   ├── cart.html      # 장바구니 페이지 *
-│   ├── payment.html   # 결제 페이지
-│   └── error404.html  # 404 오류 페이지
 │   │
 │   └── /scripts           # 각 페이지별 JavaScript 파일
 │       ├── index.js       # 상품 목록 페이지 관련 JS
@@ -70,7 +58,13 @@
 │       ├── cart.js        # 장바구니 페이지 관련 JS
 │       └── payment.js     # 결제 페이지 관련 JS
 │
-├── /dist                  # 빌드된 파일 (Vite 빌드 결과물)
+├── index.html             # 상품 목록 페이지 *
+├── login.html             # 로그인 페이지 *
+├── cart.html              # 장바구니 페이지 *
+├── product.html           # 상품 상세 페이지
+├── signup.html            # 회원 가입 페이지
+├── payment.html           # 결제 페이지
+└── error404.html          # 404 오류 페이지
 │
 ├── package.json           # 프로젝트 설정 파일
 ├── vite.config.js         # Vite 설정 파일
