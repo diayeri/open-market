@@ -2,17 +2,16 @@ import { showDialog } from "./dialog.js";
 const url = "https://openmarket.weniv.co.kr";
 const fetchHeaders = { "Content-Type": "application/json" };
 
-// 0. 장바구니 데이터 불러오기 (fetch)
-// 0-1. 완료 - 장바구니 데이터가 없으면, 안내문구_on, footer_off, 결제버튼_off
-// 0-2. 완료 - 장바구니 데이터가 있으면, 리스트_on (addListUi)
-// 0-3. 완료 - 장바구니 리스트 product_id로 정보 가져오기
+// 0. 완 - 장바구니 데이터 불러오기 (fetch)
+// 0-1. 완 - 장바구니 데이터가 없으면, 안내문구_on, footer_off, 결제버튼_off
+// 0-2. 완 - 장바구니 데이터가 있으면, 리스트_on (addListUi)
+// 0-3. 완 - 장바구니 리스트 product_id로 정보 가져오기
 
-// 1. 삭제/수정 버튼 누르면 -> dialog 요소를 만들고 보여주기 (dialog.js)
-// 1-1. dialog 요소가 기존에 없으면, 새로 만들기 - 아이디 체크
-// 1-2. dialog 요소가 기존에 있으면, 기존것 띄우기
+// 1. 완 - 삭제/수정 버튼 누르면 -> dialog 요소를 만들고 보여주기 (dialog.js)
+// 1-1. 완 - dialog 요소가 기존에 없으면, 새로 만들기 - 아이디 체크
+// 1-2. 완 - dialog 요소가 기존에 있으면, 기존것 띄우기
 
 // 2. 삭제/수정 팝업 입력값 적용하기
-// 2-1. 삭제 팝업
 // 2-2. 수정 팝업
 // 2-2-1. 수정 팝업 인풋에 기존 값 불러오기 (value)
 // 2-2-2. 최대, 최소 값일 때 버튼 disabled
@@ -171,6 +170,7 @@ $cartList.addEventListener("click", (e) => {
 
   // 리스트 수정버튼 누르면
   if (clickEditBtn) {
+    const value = e.target.parentNode.querySelector(".num").innerText;
     const $counter = `
       <div class="counter">
         <button type="button" class="btn-edit">
@@ -181,7 +181,7 @@ $cartList.addEventListener("click", (e) => {
         </button>
         <label for="amount00">
           <span class="sr-only">수량</span>
-          <input type="number" id="amount00" class="num" />
+          <input type="number" id="amount00" class="num" value="${value}" />
         </label>
         <button type="button" class="btn-edit">
           <img
