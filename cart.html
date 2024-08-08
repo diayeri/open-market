@@ -88,7 +88,7 @@
               </div>
               <div class="w-1/4 text-center ml-auto">
                 <div class="counter">
-                  <button type="button">
+                  <button type="button" class="btn-edit">
                     <img
                       src="./src/assets/img/icon-minus-line.svg"
                       alt="minus"
@@ -99,7 +99,7 @@
                     <input type="number" id="amount00" />
                   </label> -->
                   <div class="num"></div>
-                  <button type="button">
+                  <button type="button" class="btn-edit">
                     <img
                       src="./src/assets/img/icon-plus-line.svg"
                       alt="minus"
@@ -160,16 +160,7 @@
         <button type="submit" class="btn btn-primary btn-lg">주문하기</button>
       </div>
     </main>
-    <dialog id="checkModal" class="hidden">
-      <button type="button" id="closeBtn" class="btn-del">
-        <img src="./src/assets/img/icon-delete.svg" alt="삭제" />
-      </button>
-      <p class="mt-[60px]">상품을 삭제하시겠습니까?</p>
-      <div class="wrap-btn">
-        <button type="button" class="btn btn-sm">취소</button>
-        <button type="button" class="btn btn-sm btn-primary">확인</button>
-      </div>
-    </dialog>
+
     <footer>
       <div class="cont">
         <div class="wrap-link">
@@ -200,6 +191,10 @@
         </p>
       </div>
     </footer>
-    <script src="./src/scripts/cart.js"></script>
+
+    <!-- dialog -->
+    <div id="dialogWrapper"></div>
+    <script type="module" src="./src/scripts/dialog.js"></script>
+    <script type="module" src="./src/scripts/cart.js"></script>
   </body>
 </html>
