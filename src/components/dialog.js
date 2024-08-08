@@ -34,7 +34,9 @@ export const showDialog = (
   document.getElementById(id).showModal();
 };
 
-export const showEditDialog = () => {
+export const showEditDialog = (li) => {
+  const id = li.id;
+  const value = li.querySelector(".num").innerText;
   const $counter = `
     <div class="counter">
       <button type="button" class="btn-edit">
@@ -55,7 +57,7 @@ export const showEditDialog = () => {
       </button>
     </div>
   `;
-  showDialog("editDialog", $counter, undefined, "수정", () => {
+  showDialog(`editDialog${id}`, $counter, undefined, "수정", () => {
     // 확인버튼 누르면 콜백 함수 작동
   });
 };

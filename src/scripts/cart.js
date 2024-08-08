@@ -1,4 +1,4 @@
-import { showDialog } from "../components/dialog.js";
+import { showDialog, showEditDialog } from "../components/dialog.js";
 const url = "https://openmarket.weniv.co.kr";
 const fetchHeaders = { "Content-Type": "application/json" };
 
@@ -31,7 +31,7 @@ const addListUi = (product, cart) => {
     product.shipping_method === "PARCEL" ? "택배배송" : "무료배송";
 
   const $li = `
-    <li>
+    <li id="${cart.cart_item_id}">
       <label for="item${cart.cart_item_id}" class="wrap-checkbox">
         <span class="sr-only">선택</span>
         <input type="checkbox" name="item" id="item${cart.cart_item_id}" />
@@ -147,8 +147,8 @@ $cartList.addEventListener("click", (e) => {
 
   // 리스트 수정버튼 누르면
   if (clickEditBtn) {
-    const value = e.target.closest(".counter").querySelector(".num").innerText;
-    const data = e.target.closest(".counter");
-    // console.log(value);
+    const $li = e.target.closest("li");
+    // console.log($li);
+    showEditDialog($li);
   }
 });
