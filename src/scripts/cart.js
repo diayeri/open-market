@@ -3,9 +3,9 @@ const url = "https://openmarket.weniv.co.kr";
 const fetchHeaders = { "Content-Type": "application/json" };
 
 // 0. 장바구니 데이터 불러오기 (fetch)
-// 0-1. 장바구니 데이터가 없으면, 안내문구_on, footer_off, 결제버튼_off
-// 0-2. 장바구니 데이터가 있으면, 리스트_on (addListUi)
-// 0-3. 장바구니 리스트 product_id로 정보 가져오기
+// 0-1. 완료 - 장바구니 데이터가 없으면, 안내문구_on, footer_off, 결제버튼_off
+// 0-2. 완료 - 장바구니 데이터가 있으면, 리스트_on (addListUi)
+// 0-3. 완료 - 장바구니 리스트 product_id로 정보 가져오기
 
 // 1. 삭제/수정 버튼 누르면 -> dialog 요소를 만들고 보여주기 (dialog.js)
 // 1-1. dialog 요소가 기존에 없으면, 새로 만들기 - 아이디 체크
@@ -94,17 +94,33 @@ const addListUi = (product, cartId, quantity) => {
   $cartList.insertAdjacentHTML("beforeend", $li);
 };
 
+// 장바구니 상태에 따른 UI
+const cartState = (state) => {
+  if (state) {
+    const $emptyOff = document.querySelectorAll(".empty-off");
+    $emptyOff.forEach((i) => i.classList.remove("!hidden"));
+  } else {
+    const $emptyOn = document.querySelector(".empty-on");
+    $emptyOn.classList.remove("!hidden");
+  }
+};
+
 // 장바구니 아이템의 정보 불러오기
 const loadProductInfo = async (productId, cartId, quantity) => {
-  const res = await fetch(url + "/products");
+  const res = await fetch(url + "/products/");
   const products = await res.json();
 
-  products.results.forEach((e) => {
-    if (e.product_id === productId) {
-      console.log(e);
-      addListUi(e, cartId, quantity);
-    }
-  });
+  if (products.results.length === 0) {
+    cartState(0);
+  } else {
+    cartState(1);
+    products.results.forEach((e) => {
+      if (e.product_id === productId) {
+        console.log(e);
+        addListUi(e, cartId, quantity);
+      }
+    });
+  }
 };
 
 // 장바구니 불러오기

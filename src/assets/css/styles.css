@@ -239,7 +239,7 @@ footer {
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: 20px 20px 20px 30px;
+    padding: 20px;
     margin-bottom: 35px;
     border-radius: 10px;
     background-color: var(--gray-lighter);
@@ -303,14 +303,21 @@ footer {
     align-items: center;
     justify-content: center;
     position: relative;
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--primary);
-    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
     input {
       visibility: hidden;
       width: 0;
       height: 0;
+    }
+    &::before {
+      position: absolute;
+      content: "";
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--primary);
+      border-radius: 10px;
     }
     &:has(input:checked)::after {
       content: "";
@@ -341,13 +348,14 @@ footer {
         align-items: center;
         border: 2px solid #e0e0e0;
         border-radius: 10px;
-        padding: 20px 20px 20px 30px;
+        padding: 20px;
         margin-top: 10px;
         .thumb {
           width: 160px;
+          border-radius: 10px;
           aspect-ratio: 1 / 1;
           object-fit: cover;
-          margin-left: 40px;
+          margin-left: 30px;
         }
         .wrap-text {
           display: flex;
