@@ -8,7 +8,7 @@ export const showDialog = (
     const $dialogWrapper = document.querySelector("#dialogWrapper");
     const $dialog = `
     <dialog id="${id}">
-      <button type="button" class="btn-del btn-close" onclick="close()">
+      <button type="button" class="btn-del btn-close">
         <img src="./src/assets/img/icon-delete.svg" alt="삭제" />
       </button>
       <p class="mt-[60px]">${content}</p>
@@ -19,15 +19,13 @@ export const showDialog = (
     </dialog>
   `;
     $dialogWrapper.insertAdjacentHTML("beforeend", $dialog);
+
+    // 팝업 내 닫기 버튼 기능
+    $dialogWrapper.addEventListener("click", (e) => {
+      if (e.target.closest(".btn-close")) {
+        e.target.closest("dialog").close();
+      }
+    });
   }
   document.getElementById(id).showModal();
 };
-
-// 팝업 내 닫기 버튼
-// document.querySelector("dialog")?.addEventListener("click", (e) => {
-//   console.log("hey");
-//   const clickCloseBtn = e.target.closest(".btn-close");
-//   if (clickCloseBtn) {
-//     // e.target.closest("dialog").close();
-//   }
-// });
