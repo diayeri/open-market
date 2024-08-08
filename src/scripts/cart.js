@@ -1,4 +1,6 @@
 import { showDialog } from "./dialog.js";
+const url = "https://openmarket.weniv.co.kr";
+const fetchHeaders = { "Content-Type": "application/json" };
 
 // 0. 장바구니 데이터 불러오기 (fetch)
 // 0-1. 장바구니 데이터가 없으면, 안내문구_on, footer_off, 결제버튼_off
@@ -21,12 +23,12 @@ import { showDialog } from "./dialog.js";
 
 const $cartList = document.querySelector(".cart-list");
 
-const addListUi = () => {
+const addListUi = (e) => {
   const $li = `
     <li>
-      <label for="item00" class="wrap-checkbox">
+      <label for="item${e.cart_item_id}" class="wrap-checkbox">
         <span class="sr-only">선택</span>
-        <input type="checkbox" name="item" id="item00" />
+        <input type="checkbox" name="item" id="item${e.cart_item_id}" />
       </label>
       <img
         src="https://blog-ko.engram.us/content/images/size/w760h400/2024/03/------16.png"
@@ -74,6 +76,24 @@ const addListUi = () => {
   $cartList.insertAdjacentHTML("beforeend", $li);
 };
 
+// 장바구니 불러오기
+const loadCart = async () => {
+  const token = localStorage.getItem("login-token");
+  const res = await fetch(url + "/cart/", {
+    method: "GET",
+    headers: {
+      Authorization: `JWT ${token}`,
+    },
+  });
+  const cartLists = await res.json();
+  console.log(cartLists.results);
+  cartLists.results?.forEach((list) => {
+    addListUi(list);
+  });
+};
+loadCart();
+
+// 리스트 삭제, 수정
 $cartList.addEventListener("click", (e) => {
   console.log(e.target);
   const clickDelBtn = e.target.closest(".btn-del");
