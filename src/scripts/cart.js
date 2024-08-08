@@ -7,26 +7,6 @@ import { showDialog } from "./dialog.js";
 
 const $cartList = document.querySelector(".cart-list");
 // const $editDialog = document.querySelector("#editDialog");
-const $counter = `
-  <div class="counter">
-    <button type="button" class="btn-edit">
-      <img
-        src="./src/assets/img/icon-minus-line.svg"
-        alt="minus"
-      />
-    </button>
-    <label for="amount00" class="num">
-      <span class="sr-only">수량</span>
-      <input type="number" id="amount00" />
-    </label>
-    <button type="button" class="btn-edit">
-      <img
-        src="./src/assets/img/icon-plus-line.svg"
-        alt="minus"
-      />
-    </button>
-  </div>
-`;
 
 $cartList.addEventListener("click", (e) => {
   console.log(e.target);
@@ -40,11 +20,27 @@ $cartList.addEventListener("click", (e) => {
     showDialog("deleteListDialog", "상품을 삭제하시겠습니까?");
   }
 
-  // if (clickEditBtn) {
-  //   const editDialog = document.querySelector("#editDialog");
-  //   if (!editDialog) {
-  //     addDialogUi("editDialog", $counter);
-  //   }
-  //   document.querySelector("#editDialog")?.showModal();
-  // }
+  if (clickEditBtn) {
+    const $counter = `
+      <div class="counter">
+        <button type="button" class="btn-edit">
+          <img
+            src="./src/assets/img/icon-minus-line.svg"
+            alt="minus"
+          />
+        </button>
+        <label for="amount00">
+          <span class="sr-only">수량</span>
+          <input type="number" id="amount00" class="num" />
+        </label>
+        <button type="button" class="btn-edit">
+          <img
+            src="./src/assets/img/icon-plus-line.svg"
+            alt="minus"
+          />
+        </button>
+      </div>
+    `;
+    showDialog("editDialog", $counter, undefined, "수정");
+  }
 });
