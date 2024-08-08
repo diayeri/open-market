@@ -2,7 +2,8 @@ export const showDialog = (
   id,
   content,
   defalutBtn = "취소",
-  activeBtn = "확인"
+  activeBtn = "확인",
+  onActiveBtnClick = () => {}
 ) => {
   if (!document.getElementById(id)) {
     const $dialogWrapper = document.querySelector("#dialogWrapper");
@@ -23,6 +24,9 @@ export const showDialog = (
     // 팝업 내 닫기 버튼 기능
     $dialogWrapper.addEventListener("click", (e) => {
       if (e.target.closest(".btn-close")) {
+        e.target.closest("dialog").close();
+      } else if (e.target.closest(".btn-primary")) {
+        onActiveBtnClick(); // 확인 버튼 클릭시 콜백 호출
         e.target.closest("dialog").close();
       }
     });

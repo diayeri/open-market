@@ -17,7 +17,15 @@ $cartList.addEventListener("click", (e) => {
 
   // 삭제버튼 누르면 -> #deleteListDialog 팝업 띄우기
   if (clickDelBtn) {
-    showDialog("deleteListDialog", "상품을 삭제하시겠습니까?");
+    showDialog(
+      "deleteListDialog",
+      "상품을 삭제하시겠습니까?",
+      undefined,
+      undefined,
+      () => {
+        // 확인버튼 누르면 콜백 함수 작동
+      }
+    );
   }
 
   if (clickEditBtn) {
@@ -41,6 +49,8 @@ $cartList.addEventListener("click", (e) => {
         </button>
       </div>
     `;
-    showDialog("editDialog", $counter, undefined, "수정");
+    showDialog("editDialog", $counter, undefined, "수정", () => {
+      // 확인버튼 누르면 콜백 함수 작동
+    });
   }
 });
