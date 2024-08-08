@@ -5,6 +5,7 @@ const fetchHeaders = { "Content-Type": "application/json" };
 // 0. 장바구니 데이터 불러오기 (fetch)
 // 0-1. 장바구니 데이터가 없으면, 안내문구_on, footer_off, 결제버튼_off
 // 0-2. 장바구니 데이터가 있으면, 리스트_on (addListUi)
+// 0-3. 장바구니 리스트 product_id로 정보 가져오기
 
 // 1. 삭제/수정 버튼 누르면 -> dialog 요소를 만들고 보여주기 (dialog.js)
 // 1-1. dialog 요소가 기존에 없으면, 새로 만들기 - 아이디 체크
@@ -23,23 +24,44 @@ const fetchHeaders = { "Content-Type": "application/json" };
 
 const $cartList = document.querySelector(".cart-list");
 
-const addListUi = (e) => {
+const addListUi = (product, cartId, quantity) => {
+  const priceSum = (product.price * quantity).toLocaleString();
+  product.price = product.price.toLocaleString();
+  const shipping =
+    product.shipping_method === "PARCEL" ? "택배배송" : "무료배송";
+
+  // const data = {
+  //   product_id: 455,
+  //   created_at: "2024-06-25T01:58:13.039260",
+  //   updated_at: "2024-06-26T22:54:22.350531",
+  //   product_name: "yonex 테니스 라켓",
+  //   image:
+  //     "https://openmarket.weniv.co.kr/media/products/2024/06/25/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-06-25_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_12.00.39_wWpDrY7.png",
+  //   price: 240000,
+  //   shipping_method: "PARCEL",
+  //   shipping_fee: 3000,
+  //   stock: 100,
+  //   product_info: "yonex 테니스 라켓 🩵",
+  //   seller: 312,
+  //   store_name: "return tennis shop",
+  // };
+
   const $li = `
     <li>
-      <label for="item${e.cart_item_id}" class="wrap-checkbox">
+      <label for="item${cartId}" class="wrap-checkbox">
         <span class="sr-only">선택</span>
-        <input type="checkbox" name="item" id="item${e.cart_item_id}" />
+        <input type="checkbox" name="item" id="item${cartId}" />
       </label>
       <img
-        src="https://blog-ko.engram.us/content/images/size/w760h400/2024/03/------16.png"
+        src="${product.image}"
         alt="img"
         class="thumb"
       />
       <div class="wrap-text">
-        <p class="subt">우당탕탕 라이캣의 실험실</p>
-        <h3 class="title">우당탕탕 라이캣의 실험실</h3>
-        <p class="price">17,500원</p>
-        <p class="info">택배배송 / 무료배송</p>
+        <p class="subt">${product.store_name}</p>
+        <h3 class="title">${product.product_name}</h3>
+        <p class="price">${product.price}원</p>
+        <p class="info">${shipping}</p>
       </div>
       <div class="w-1/4 text-center ml-auto">
         <div class="counter">
@@ -49,11 +71,7 @@ const addListUi = (e) => {
               alt="minus"
             />
           </button>
-          <!-- <label for="amount00">
-            <span class="sr-only">수량</span>
-            <input type="number" id="amount00" />
-          </label> -->
-          <div class="num"></div>
+          <div class="num">${quantity}</div>
           <button type="button" class="btn-edit">
             <img
               src="./src/assets/img/icon-plus-line.svg"
@@ -63,7 +81,7 @@ const addListUi = (e) => {
         </div>
       </div>
       <div class="price-total w-1/4 text-center">
-        <p>18,600원</p>
+        <p>${priceSum}원</p>
         <button type="button" class="btn btn-sm btn-primary">
           주문하기
         </button>
@@ -74,6 +92,19 @@ const addListUi = (e) => {
     </li>  
   `;
   $cartList.insertAdjacentHTML("beforeend", $li);
+};
+
+// 장바구니 아이템의 정보 불러오기
+const loadProductInfo = async (productId, cartId, quantity) => {
+  const res = await fetch(url + "/products");
+  const products = await res.json();
+
+  products.results.forEach((e) => {
+    if (e.product_id === productId) {
+      console.log(e);
+      addListUi(e, cartId, quantity);
+    }
+  });
 };
 
 // 장바구니 불러오기
@@ -87,8 +118,18 @@ const loadCart = async () => {
   });
   const cartLists = await res.json();
   console.log(cartLists.results);
-  cartLists.results?.forEach((list) => {
-    addListUi(list);
+
+  // const data = {
+  //   my_cart: 3,
+  //   cart_item_id: 2759,
+  //   product_id: 455,
+  //   quantity: 3,
+  //   is_active: true,
+  // };
+
+  cartLists.results?.forEach((e) => {
+    // console.log(e.product_id);
+    loadProductInfo(e.product_id, e.cart_item_id, e.quantity);
   });
 };
 loadCart();

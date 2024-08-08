@@ -24,7 +24,7 @@ const addListUi = (e) => {
       </a>
     </li>
   `;
-  $ul.insertAdjacentHTML("beforeend", $li);
+  $ul?.insertAdjacentHTML("beforeend", $li);
 };
 
 // 상품목록 불러오기
