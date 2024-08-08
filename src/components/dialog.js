@@ -33,3 +33,29 @@ export const showDialog = (
   }
   document.getElementById(id).showModal();
 };
+
+export const showEditDialog = () => {
+  const $counter = `
+    <div class="counter">
+      <button type="button" class="btn-edit">
+        <img
+          src="./src/assets/img/icon-minus-line.svg"
+          alt="minus"
+        />
+      </button>
+      <label for="amount00">
+        <span class="sr-only">수량</span>
+        <input type="number" id="amount00" class="num" value="${value}" />
+      </label>
+      <button type="button" class="btn-edit">
+        <img
+          src="./src/assets/img/icon-plus-line.svg"
+          alt="minus"
+        />
+      </button>
+    </div>
+  `;
+  showDialog("editDialog", $counter, undefined, "수정", () => {
+    // 확인버튼 누르면 콜백 함수 작동
+  });
+};

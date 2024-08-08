@@ -1,4 +1,4 @@
-import { showDialog } from "./dialog.js";
+import { showDialog } from "../components/dialog.js";
 const url = "https://openmarket.weniv.co.kr";
 const fetchHeaders = { "Content-Type": "application/json" };
 
@@ -13,7 +13,7 @@ const fetchHeaders = { "Content-Type": "application/json" };
 
 // 2. 삭제/수정 팝업 입력값 적용하기
 // 2-2. 수정 팝업
-// 2-2-1. 수정 팝업 인풋에 기존 값 불러오기 (value)
+// 2-2-1. 완 - 수정 팝업 인풋에 기존 값 불러오기 (value)
 // 2-2-2. 최대, 최소 값일 때 버튼 disabled
 // 2-3. 삭제/수정 결과 데이터 전송 (fetch)
 // 2-4. 삭제/수정 데이터 다시 받아오기 (fetch)
@@ -23,33 +23,18 @@ const fetchHeaders = { "Content-Type": "application/json" };
 
 const $cartList = document.querySelector(".cart-list");
 
-const addListUi = (product, cartId, quantity) => {
+const addListUi = (product, cart) => {
+  const quantity = cart.quantity;
   const priceSum = (product.price * quantity).toLocaleString();
   product.price = product.price.toLocaleString();
   const shipping =
     product.shipping_method === "PARCEL" ? "택배배송" : "무료배송";
 
-  // const data = {
-  //   product_id: 455,
-  //   created_at: "2024-06-25T01:58:13.039260",
-  //   updated_at: "2024-06-26T22:54:22.350531",
-  //   product_name: "yonex 테니스 라켓",
-  //   image:
-  //     "https://openmarket.weniv.co.kr/media/products/2024/06/25/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-06-25_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_12.00.39_wWpDrY7.png",
-  //   price: 240000,
-  //   shipping_method: "PARCEL",
-  //   shipping_fee: 3000,
-  //   stock: 100,
-  //   product_info: "yonex 테니스 라켓 🩵",
-  //   seller: 312,
-  //   store_name: "return tennis shop",
-  // };
-
   const $li = `
     <li>
-      <label for="item${cartId}" class="wrap-checkbox">
+      <label for="item${cart.cart_item_id}" class="wrap-checkbox">
         <span class="sr-only">선택</span>
-        <input type="checkbox" name="item" id="item${cartId}" />
+        <input type="checkbox" name="item" id="item${cart.cart_item_id}" />
       </label>
       <img
         src="${product.image}"
@@ -104,22 +89,14 @@ const cartState = (state) => {
   }
 };
 
-// 장바구니 아이템의 정보 불러오기
-const loadProductInfo = async (productId, cartId, quantity) => {
+// 장바구니 상품 정보 불러오기
+const loadProductInfo = async (productId) => {
   const res = await fetch(url + "/products/");
   const products = await res.json();
 
-  if (products.results.length === 0) {
-    cartState(0);
-  } else {
-    cartState(1);
-    products.results.forEach((e) => {
-      if (e.product_id === productId) {
-        console.log(e);
-        addListUi(e, cartId, quantity);
-      }
-    });
-  }
+  let productInfo = products.results?.find((e) => e.product_id === productId);
+  // console.log(productInfo);
+  return productInfo;
 };
 
 // 장바구니 불러오기
@@ -132,26 +109,26 @@ const loadCart = async () => {
     },
   });
   const cartLists = await res.json();
-  console.log(cartLists.results);
+  // console.log(cartLists.results);
 
-  // const data = {
-  //   my_cart: 3,
-  //   cart_item_id: 2759,
-  //   product_id: 455,
-  //   quantity: 3,
-  //   is_active: true,
-  // };
+  if (cartLists.results.length === 0) {
+    cartState(0);
+    return;
+  } else {
+    cartState(1);
 
-  cartLists.results?.forEach((e) => {
-    // console.log(e.product_id);
-    loadProductInfo(e.product_id, e.cart_item_id, e.quantity);
-  });
+    cartLists.results.forEach(async (cart) => {
+      const product = await loadProductInfo(cart.product_id);
+      // console.log(product, cart);
+      addListUi(product, cart);
+    });
+  }
 };
 loadCart();
 
 // 리스트 삭제, 수정
 $cartList.addEventListener("click", (e) => {
-  console.log(e.target);
+  // console.log(e.target);
   const clickDelBtn = e.target.closest(".btn-del");
   const clickEditBtn = e.target.closest(".btn-edit");
 
@@ -170,29 +147,8 @@ $cartList.addEventListener("click", (e) => {
 
   // 리스트 수정버튼 누르면
   if (clickEditBtn) {
-    const value = e.target.parentNode.querySelector(".num").innerText;
-    const $counter = `
-      <div class="counter">
-        <button type="button" class="btn-edit">
-          <img
-            src="./src/assets/img/icon-minus-line.svg"
-            alt="minus"
-          />
-        </button>
-        <label for="amount00">
-          <span class="sr-only">수량</span>
-          <input type="number" id="amount00" class="num" value="${value}" />
-        </label>
-        <button type="button" class="btn-edit">
-          <img
-            src="./src/assets/img/icon-plus-line.svg"
-            alt="minus"
-          />
-        </button>
-      </div>
-    `;
-    showDialog("editDialog", $counter, undefined, "수정", () => {
-      // 확인버튼 누르면 콜백 함수 작동
-    });
+    const value = e.target.closest(".counter").querySelector(".num").innerText;
+    const data = e.target.closest(".counter");
+    // console.log(value);
   }
 });
