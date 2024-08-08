@@ -439,4 +439,7 @@ dialog {
       width: 100px;
     }
   }
+  &:not([open]) {
+    display: none;
+  }
 }
