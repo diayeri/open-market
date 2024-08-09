@@ -32,7 +32,7 @@ const $cartList = document.querySelector(".cart-list");
 const addListUi = (product, cart) => {
   const quantity = cart.quantity;
   const priceSum = (product.price * quantity).toLocaleString();
-  product.price = product.price.toLocaleString();
+  console.log(product.price, quantity);
   const shipping =
     product.shipping_method === "PARCEL" ? "택배배송" : "무료배송";
   // console.log(product, cart);
@@ -40,7 +40,9 @@ const addListUi = (product, cart) => {
   const productLink = "#";
 
   const $li = `
-    <li id="${cart.cart_item_id}" data-cart="${cart.cart_item_id}" data-product="${product.product_id}">
+    <li id="${cart.cart_item_id}" data-cart="${
+    cart.cart_item_id
+  }" data-product="${product.product_id}">
       <label for="item${cart.cart_item_id}" class="wrap-checkbox">
         <span class="sr-only">선택</span>
         <input type="checkbox" name="item" id="item${cart.cart_item_id}" />
@@ -54,7 +56,7 @@ const addListUi = (product, cart) => {
         <div class="wrap-text">
           <p class="subt">${product.store_name}</p>
           <h3 class="title">${product.product_name}</h3>
-          <p class="price">${product.price}원</p>
+          <p class="price">${product.price.toLocaleString()}원</p>
           <p class="info">${shipping}</p>
         </div>
       </a>
@@ -100,8 +102,15 @@ const cartState = (state) => {
   }
 };
 
+// 장바구니 초기화
+const clearCart = () => {
+  const $cartList = document.querySelector(".cart-list");
+  $cartList.replaceChildren();
+};
+
 // 장바구니 불러오기
-const loadCart = async () => {
+export const loadCart = async () => {
+  clearCart();
   const cartLists = await fetchCart();
   // console.log(cartLists);
 

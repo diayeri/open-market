@@ -103,19 +103,11 @@ const addEditDialogUi = (cartItemId, productId, value, max) => {
   }
 };
 
-const editCartItem = (oldValue, productId) => {
+const editCartItem = (oldValue) => {
   // 수정 버튼 누르면 작동됨
   // 1. 기존값, 변경값 불러오기
   // 2. 값의 변동이 있으면 장바구니 데이터 변경 요청
   // 3. 카트 리스트 다시 받아오기
-  // const $counter = document
-  //   .getElementById(`counter${productId}`)
-  //   .querySelector("input.num");
-  // const newValue = $editDialog.querySelector("num");
-  // if (value === li.querySelector(".num").innerText)
-  // fetchPutCart(cartItemId, productId, value);
-  // loadCart();
-  // console.log("수정한 데이터 받기");
   const $editDialog = document.querySelector(".dialog-edit");
   $editDialog.addEventListener("click", async (e) => {
     if (e.target.classList.contains("btn-primary")) {
@@ -124,8 +116,11 @@ const editCartItem = (oldValue, productId) => {
       const productId = e.currentTarget.dataset.product;
       // console.log(oldValue, newValue);
       // console.log(cartItemId, productId, newValue);
-      const data = await fetchPutCart(cartItemId, productId, newValue);
-      console.log(data);
+      if (oldValue !== newValue) {
+        await fetchPutCart(cartItemId, productId, newValue);
+        // loadCart();
+      }
+      // console.log(data);
     }
   });
 };
