@@ -1,3 +1,5 @@
+import { counter } from "../components/counter.js";
+
 export const showDialog = (
   id,
   content,
@@ -38,8 +40,8 @@ export const showEditDialog = (li) => {
   const id = li.id;
   const value = li.querySelector(".num").innerText;
   const $counter = `
-    <div class="counter">
-      <button type="button" class="btn-edit">
+    <div class="counter" id="counter${id}">
+      <button type="button" class="btn-edit btn-minus">
         <img
           src="./src/assets/img/icon-minus-line.svg"
           alt="minus"
@@ -49,7 +51,7 @@ export const showEditDialog = (li) => {
         <span class="sr-only">수량</span>
         <input type="number" id="amount00" class="num" value="${value}" />
       </label>
-      <button type="button" class="btn-edit">
+      <button type="button" class="btn-edit btn-plus">
         <img
           src="./src/assets/img/icon-plus-line.svg"
           alt="minus"
@@ -60,4 +62,5 @@ export const showEditDialog = (li) => {
   showDialog(`editDialog${id}`, $counter, undefined, "수정", () => {
     // 확인버튼 누르면 콜백 함수 작동
   });
+  counter(document.getElementById(`counter${id}`));
 };
