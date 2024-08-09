@@ -82,16 +82,17 @@ export const fetchCart = async () => {
 export const fetchPutCart = async (cartItemId, productId, newValue) => {
   const token = getToken();
   try {
-    const res = await fetch(url + "/cart/" + cartItemId + "/", {
+    const res = await fetch(`${url}/cart/${cartItemId}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `JWT ${token}`,
       },
-      body: {
+      body: JSON.stringify({
         product_id: productId,
         quantity: newValue,
-      },
+        is_active: true,
+      }),
     });
     if (!res.ok) {
       throw new Error("fetch 실패: cart data 수정");

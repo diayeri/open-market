@@ -12,6 +12,9 @@ const $dialogWrapper = document.querySelector("#dialogWrapper");
 
 const addDialogUi = (
   dialogId,
+  dialogClass,
+  cartItemId,
+  productId,
   content,
   defalutBtn = "취소",
   activeBtn = "확인",
@@ -20,7 +23,7 @@ const addDialogUi = (
   // 최초 1번만 생성
   if (!document.getElementById(dialogId)) {
     const $dialog = `
-    <dialog id="${dialogId}">
+    <dialog id="${dialogId}" class="${dialogClass}" data-product="${productId}" data-cart="${cartItemId}">
       <p class="mt-[60px]">${content}</p>
       <div class="wrap-btn">
         <button type="button" class="btn btn-sm btn-close">${defalutBtn}</button>
@@ -76,7 +79,15 @@ const addEditDialogUi = (cartItemId, productId, value, max) => {
     </div>
   `;
     // 팝업 UI 생성
-    addDialogUi(dialogId, $counterUi, undefined, "수정");
+    addDialogUi(
+      dialogId,
+      "dialog-edit",
+      cartItemId,
+      productId,
+      $counterUi,
+      undefined,
+      "수정"
+    );
 
     const $counter = document.getElementById(`counter${productId}`);
     counter($counter, () => editCartItem(value));
@@ -86,13 +97,13 @@ const addEditDialogUi = (cartItemId, productId, value, max) => {
     $editDialog.querySelector(".num").value = value;
 
     let $counter = document.getElementById(`counter${productId}`);
-    console.log(productId, $counter);
+    // console.log(productId, $counter);
     // // 다시 열었을 때 버튼 UI 초기화
     counterFunc($counter);
   }
 };
 
-const editCartItem = (oldValue, newValue, productId) => {
+const editCartItem = (oldValue, productId) => {
   // 수정 버튼 누르면 작동됨
   // 1. 기존값, 변경값 불러오기
   // 2. 값의 변동이 있으면 장바구니 데이터 변경 요청
@@ -105,22 +116,37 @@ const editCartItem = (oldValue, newValue, productId) => {
   // fetchPutCart(cartItemId, productId, value);
   // loadCart();
   // console.log("수정한 데이터 받기");
-  // const $editDialog = document.querySelector("#editDialog");
-  // $editDialog.addEventListener("click", (e) => {
-  //   if (e.target.classList.contains("btn-primary")) {
-  //     const newValue = e.target.closest("dialog").querySelector(".num").value;
-  //     console.log(oldValue, newValue);
-  //   }
-  // });
+  const $editDialog = document.querySelector(".dialog-edit");
+  $editDialog.addEventListener("click", async (e) => {
+    if (e.target.classList.contains("btn-primary")) {
+      const newValue = e.currentTarget.querySelector(".num").value;
+      const cartItemId = e.currentTarget.dataset.cart;
+      const productId = e.currentTarget.dataset.product;
+      // console.log(oldValue, newValue);
+      // console.log(cartItemId, productId, newValue);
+      const data = await fetchPutCart(cartItemId, productId, newValue);
+      console.log(data);
+    }
+  });
 };
 
 export const showDeleteDialog = (li) => {
-  const productId = li.querySelector(".link-product").id;
+  const productId = li.dataset.product;
+  const cartItemId = li.dataset.cart;
   const id = "deleteDialog";
 
-  addDialogUi(id, "상품을 삭제하시겠습니까?", undefined, undefined, () => {
-    // 확인 버튼 -> 장바구니 데이터 삭제 -> 받아오기
-  });
+  addDialogUi(
+    id,
+    "dialog-del",
+    cartItemId,
+    productId,
+    "상품을 삭제하시겠습니까?",
+    undefined,
+    undefined,
+    () => {
+      // 확인 버튼 -> 장바구니 데이터 삭제 -> 받아오기
+    }
+  );
   document.getElementById(id).showModal();
 };
 

@@ -40,7 +40,7 @@ const addListUi = (product, cart) => {
   const productLink = "#";
 
   const $li = `
-    <li id="${cart.cart_item_id}">
+    <li id="${cart.cart_item_id}" data-cart="${cart.cart_item_id}" data-product="${product.product_id}">
       <label for="item${cart.cart_item_id}" class="wrap-checkbox">
         <span class="sr-only">선택</span>
         <input type="checkbox" name="item" id="item${cart.cart_item_id}" />
