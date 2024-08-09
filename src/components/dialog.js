@@ -5,7 +5,7 @@ import {
   getToken,
 } from "../scripts/fetch.js";
 import { findProductInfo } from "../scripts/product.js";
-import { counter } from "../components/counter.js";
+import { counter, setCounterBtnsState } from "../components/counter.js";
 
 const addDialogUi = (
   id,
@@ -81,6 +81,10 @@ const addEditDialogUi = (
   } else {
     // 수정팝업 이미 있을때 - 내용만 바꾸기
     $editDialog.querySelector(".num").value = value;
+    // 다시 열었을 때 버튼 UI 초기화
+    // FIX: 이거 더 간단한 방법 없나?
+    const $counter = document.getElementById(`counter${productId}`);
+    setCounterBtnsState($counter);
   }
 };
 
