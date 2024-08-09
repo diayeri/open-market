@@ -5,7 +5,7 @@ import {
   getToken,
 } from "../scripts/fetch.js";
 import { findProductInfo } from "../scripts/product.js";
-import { counter, setCounterBtnsState } from "../components/counter.js";
+import { counter, counterFunc } from "../components/counter.js";
 
 const addDialogUi = (
   id,
@@ -84,7 +84,7 @@ const addEditDialogUi = (
     // 다시 열었을 때 버튼 UI 초기화
     // FIX: 이거 더 간단한 방법 없나?
     const $counter = document.getElementById(`counter${productId}`);
-    setCounterBtnsState($counter);
+    counterFunc($counter);
   }
 };
 

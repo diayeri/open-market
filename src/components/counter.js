@@ -8,7 +8,7 @@
 export const counter = ($counter) => {
   // console.log($counter);
   if ($counter) {
-    setCounterLimits($counter);
+    counterFunc($counter);
     const $input = $counter.querySelector("input.num");
     $counter.addEventListener("click", (e) => {
       const $minusBtn = e.target.closest(".btn-minus");
@@ -22,40 +22,38 @@ export const counter = ($counter) => {
         // console.log("더하기");
         $input.value++;
       }
-      setCounterLimits($counter);
+      counterFunc($counter);
     });
 
     $input.addEventListener("input", (e) => {
       // console.log("인풋이벤트", e.target.value);
-      setCounterLimits($counter);
+      counterFunc($counter);
     });
   }
 };
 
-export const setCounterBtnsState = ($counter) => {
-  const $minusBtn = $counter.querySelector(".btn-minus");
-  const $plusBtn = $counter.querySelector(".btn-plus");
-  const $input = $counter.querySelector("label .num");
-  const value = $input.value;
-  const max = Number($counter.dataset.max);
-
+const setCounterBtnsState = ($minusBtn, $plusBtn, value, max) => {
   $minusBtn.disabled = value <= 1;
   $plusBtn.disabled = value >= max;
 };
 
-const setCounterLimits = ($counter) => {
-  // FIX: setCounterBtnsState 변수 중복되는거 싫지만 어떻게 고쳐얄지 모르겠음
-  const $input = $counter.querySelector("label .num");
+const setCounterLimits = ($input, min, max) => {
   const value = $input.value;
-  const max = Number($counter.dataset.max);
-
-  if (value < 1) {
-    alert("1 이상의 숫자를 입력하세요");
-    $input.value = 1;
+  if (value < min) {
+    alert(`${min} 이상의 숫자를 입력하세요`);
+    $input.value = min;
   } else if (value > max) {
     alert(`재고 수량을 초과하였습니다 (재고: ${max}개)`);
     $input.value = max;
   }
+};
 
-  setCounterBtnsState($counter);
+export const counterFunc = ($counter) => {
+  const $minusBtn = $counter.querySelector(".btn-minus");
+  const $plusBtn = $counter.querySelector(".btn-plus");
+  const $input = $counter.querySelector("label .num");
+  const max = Number($counter.dataset.max);
+
+  setCounterBtnsState($minusBtn, $plusBtn, $input.value, max);
+  setCounterLimits($input, 1, max);
 };
