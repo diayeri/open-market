@@ -24,7 +24,6 @@ export const counter = ($counter) => {
       setCounterLimits($counter);
     });
 
-    // FIX: 최대 50 일때 500은 막으나, 200등은 막지 않음
     $input.addEventListener("input", (e) => {
       // console.log("인풋이벤트", e.target.value);
       setCounterLimits($counter);
@@ -38,7 +37,7 @@ const setCounterLimits = ($counter) => {
   const $input = $counter.querySelector("label .num");
   const value = $input.value;
   // console.log($input);
-  const max = $counter.dataset.max;
+  const max = Number($counter.dataset.max);
 
   const updateBtns = () => {
     $minusBtn.disabled = value <= 1;

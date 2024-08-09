@@ -12,6 +12,7 @@
   --font-2xl: 2.25rem; /* 36px */
   --primary: #21bf48;
   --warning: #eb5757;
+  --disabled: rgba(239, 239, 239, 0.3);
   --gray: #767676;
   --gray-light: #c4c4c4;
   --gray-lighter: #f2f2f2;
