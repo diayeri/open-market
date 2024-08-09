@@ -1,7 +1,6 @@
-import { fetchCart, findProductInfo } from "./fetch.js";
+import { fetchCart } from "./fetch.js";
+import { findProductInfo } from "../scripts/product.js";
 import { showDeleteDialog, showEditDialog } from "../components/dialog.js";
-const url = "https://openmarket.weniv.co.kr";
-const fetchHeaders = { "Content-Type": "application/json" };
 
 // 0. V 장바구니 데이터 불러오기 (fetch)
 // 0-1. V 장바구니 데이터가 없으면, 안내문구_on, footer_off, 결제버튼_off

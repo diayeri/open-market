@@ -1,4 +1,4 @@
-import { findProductInfo } from "../scripts/fetch.js";
+import { findProductInfo } from "../scripts/product.js";
 import { counter } from "../components/counter.js";
 
 const addDialogUi = (
