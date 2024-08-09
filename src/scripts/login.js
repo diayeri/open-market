@@ -1,4 +1,4 @@
-import { fetchLogin } from "./fetch.js";
+import { fetchLogin, setToken } from "./fetch.js";
 
 const $buyerLoginForm = document.querySelector("#buyerLoginForm");
 const $buyerLoginTab = document.querySelector("#buyerLoginTab");
@@ -20,7 +20,7 @@ $buyerLoginForm.addEventListener("submit", async (e) => {
       // 계정정보 일치
       history.back();
       console.log(loginRes.data);
-      localStorage.setItem("login-token", loginRes.data.token);
+      setToken(loginRes.data.token);
     } else {
       // 계정정보 불일치
       $buyerLoginErr.classList.remove("hidden");

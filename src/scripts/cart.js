@@ -1,4 +1,4 @@
-import { fetchCart, fetchPutCart, fetchDeleteCart } from "./fetch.js";
+import { fetchCart } from "./fetch.js";
 import { findProductInfo } from "../scripts/product.js";
 import { showDeleteDialog, showEditDialog } from "../components/dialog.js";
 
@@ -102,8 +102,7 @@ const cartState = (state) => {
 
 // 장바구니 불러오기
 const loadCart = async () => {
-  const token = localStorage.getItem("login-token");
-  const cartLists = await fetchCart(token);
+  const cartLists = await fetchCart();
   // console.log(cartLists);
 
   if (cartLists.results.length === 0) {

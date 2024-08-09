@@ -1,6 +1,9 @@
 const url = "https://openmarket.weniv.co.kr";
 const fetchHeaders = { "Content-Type": "application/json" };
 
+export const getToken = () => localStorage.getItem("login-token");
+export const setToken = (token) => localStorage.setItem("login-token", token);
+
 export const fetchProducts = async () => {
   try {
     const res = await fetch(url + "/products/");
@@ -50,7 +53,8 @@ export const fetchLogin = async (id, pw, type) => {
   }
 };
 
-export const fetchCart = async (token) => {
+export const fetchCart = async () => {
+  const token = getToken();
   try {
     const res = await fetch(url + "/cart/", {
       method: "GET",
@@ -75,7 +79,8 @@ export const fetchCart = async (token) => {
 //     "is_active": true
 // }
 
-export const fetchPutCart = async (cartItemId, productId, value, token) => {
+export const fetchPutCart = async (cartItemId, productId, value) => {
+  const token = getToken();
   try {
     const res = await fetch(url + "/cart/" + cartItemId + "/", {
       method: "PUT",
@@ -96,24 +101,3 @@ export const fetchPutCart = async (cartItemId, productId, value, token) => {
 };
 
 export const fetchDeleteCart = async (cartItemId, productId) => {};
-
-// export const editCartItem = async (cartItemId, productId, value, token) => {
-//   try {
-//     const res = await fetch(url + "/cart/" + cartItemId + "/", {
-//       method: "PUT",
-//       headers: {
-//         Authorization: `JWT ${token}`,
-//       },
-//       body: {
-//         product_id: productId,
-//         quantity: value,
-//       },
-//     });
-//     if (!res.ok) {
-//       throw new Error("fetch 실패: cart data 수정");
-//     }
-//     loadCart();
-//   } catch (err) {
-//     console.error(err);
-//   }
-// };

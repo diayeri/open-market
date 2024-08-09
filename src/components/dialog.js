@@ -1,3 +1,9 @@
+import {
+  fetchCart,
+  fetchPutCart,
+  fetchDeleteCart,
+  getToken,
+} from "../scripts/fetch.js";
 import { findProductInfo } from "../scripts/product.js";
 import { counter } from "../components/counter.js";
 
@@ -89,6 +95,7 @@ export const showDeleteDialog = (li) => {
 };
 
 export const showEditDialog = async (li) => {
+  const cartItemId = li.id;
   const productId = li.querySelector(".link-product").id;
   const id = "editDialog";
   const value = li.querySelector(".num").innerText;
@@ -97,6 +104,10 @@ export const showEditDialog = async (li) => {
   // console.log(value);
   addEditDialogUi(id, productId, value, max, () => {
     // 수정 버튼 -> 장바구니 데이터 변경 -> 받아오기
+    console.log("수정요청");
+    fetchPutCart(cartItemId, productId, value);
+    fetchCart();
+    console.log("수정한 데이터 받기");
   });
   document.getElementById(id).showModal();
 };
