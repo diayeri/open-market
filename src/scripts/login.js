@@ -1,5 +1,4 @@
-const url = "https://openmarket.weniv.co.kr";
-const fetchHeaders = { "Content-Type": "application/json" };
+import { fetchLogin } from "./fetch.js";
 
 const $buyerLoginForm = document.querySelector("#buyerLoginForm");
 const $buyerLoginTab = document.querySelector("#buyerLoginTab");
@@ -11,30 +10,12 @@ const $buyerLoginErr = document.querySelector("#buyerLoginErr");
 const $sellerLoginForm = document.querySelector("#sellerLoginForm");
 const $sellerLoginTab = document.querySelector("#sellerLoginTab");
 
-const login = async (id, pw, type) => {
-  try {
-    const res = await fetch(url + "/accounts/login/", {
-      method: "POST",
-      headers: fetchHeaders,
-      body: JSON.stringify({
-        username: id,
-        password: pw,
-        login_type: type,
-      }),
-    });
-    const data = await res.json();
-    return { data: data, ok: res.ok };
-  } catch (err) {
-    console.error(err);
-  }
-};
-
 $buyerLoginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const id = $buyerId.value.trim();
   const pw = $buyerPassword.value;
   if (id && pw) {
-    const loginRes = await login(id, pw, "BUYER");
+    const loginRes = await fetchLogin(id, pw, "BUYER");
     if (loginRes.ok) {
       // 계정정보 일치
       history.back();

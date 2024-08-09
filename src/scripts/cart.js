@@ -1,19 +1,20 @@
+import { fetchProducts } from "./fetch.js";
 import { showDeleteDialog, showEditDialog } from "../components/dialog.js";
 const url = "https://openmarket.weniv.co.kr";
 const fetchHeaders = { "Content-Type": "application/json" };
 
-// 0. 완 - 장바구니 데이터 불러오기 (fetch)
-// 0-1. 완 - 장바구니 데이터가 없으면, 안내문구_on, footer_off, 결제버튼_off
-// 0-2. 완 - 장바구니 데이터가 있으면, 리스트_on (addListUi)
-// 0-3. 완 - 장바구니 리스트 product_id로 정보 가져오기
+// 0. V 장바구니 데이터 불러오기 (fetch)
+// 0-1. V 장바구니 데이터가 없으면, 안내문구_on, footer_off, 결제버튼_off
+// 0-2. V 장바구니 데이터가 있으면, 리스트_on (addListUi)
+// 0-3. V 장바구니 리스트 product_id로 정보 가져오기
 
-// 1. 완 - 삭제/수정 버튼 누르면 -> dialog 요소를 만들고 보여주기 (dialog.js)
-// 1-1. 완 - dialog 요소가 기존에 없으면, 새로 만들기 - 아이디 체크
-// 1-2. 완 - dialog 요소가 기존에 있으면, 기존것 띄우기
+// 1. V 삭제/수정 버튼 누르면 -> dialog 요소를 만들고 보여주기 (dialog.js)
+// 1-1. V dialog 요소가 기존에 없으면, 새로 만들기 - 아이디 체크
+// 1-2. V dialog 요소가 기존에 있으면, 기존것 띄우기
 
 // 2. 삭제/수정 팝업 입력값 적용하기
 // 2-2. 수정 팝업
-// 2-2-1. 완 - 수정 팝업 인풋에 기존 값 불러오기 (value)
+// 2-2-1. V 수정 팝업 인풋에 기존 값 불러오기 (value)
 // 2-2-2. 카운터 기능
 // 2-2-3. 최대, 최소 값일 때 버튼 disabled
 // 2-3. 삭제/수정 결과 데이터 전송 (fetch)
@@ -93,12 +94,10 @@ const cartState = (state) => {
   }
 };
 
-// 장바구니 상품 정보 불러오기
+// 상품 아이디로 상품 정보 불러오기
 const loadProductInfo = async (productId) => {
-  const res = await fetch(url + "/products/");
-  const products = await res.json();
-
-  let productInfo = products.results?.find((e) => e.product_id === productId);
+  const products = await fetchProducts();
+  const productInfo = products.results?.find((e) => e.product_id === productId);
   // console.log(productInfo);
   return productInfo;
 };

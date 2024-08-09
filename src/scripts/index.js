@@ -1,5 +1,4 @@
-const url = "https://openmarket.weniv.co.kr";
-const fetchHeaders = { "Content-Type": "application/json" };
+import { fetchProducts } from "./fetch.js";
 
 // 상품목록 UI
 const addListUi = (e) => {
@@ -29,8 +28,7 @@ const addListUi = (e) => {
 
 // 상품목록 불러오기
 const loadProducts = async () => {
-  const res = await fetch(url + "/products");
-  const products = await res.json();
+  const products = await fetchProducts();
 
   products.results.forEach((e) => {
     addListUi(e);
