@@ -1,4 +1,4 @@
-import { counter, addCounterFunc } from "../components/counter.js";
+import { counter } from "../components/counter.js";
 
 const addDialogUi = (
   id,
@@ -68,6 +68,8 @@ const addEditDialogUi = (
     addDialogUi(dialogId, $counterUi, undefined, "수정", () => {
       onActiveBtnClick();
     });
+    const $counter = document.getElementById(`counter${productId}`);
+    counter($counter);
   } else {
     // 수정팝업 이미 있을때 - 내용만 바꾸기
     $editDialog.querySelector(".num").value = value;
@@ -89,7 +91,7 @@ export const showEditDialog = (li) => {
   // const id = `editDialog${productId}`;
   const id = "editDialog";
   let value = li.querySelector(".num").innerText;
-  console.log(value);
+  // console.log(value);
   addEditDialogUi(id, productId, value, () => {
     // 수정 버튼 -> 장바구니 데이터 변경 -> 받아오기
   });

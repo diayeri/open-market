@@ -5,20 +5,24 @@
 // 3. 최초로 팝업 만들 때, 카운터 기능추가하기
 
 export const counter = ($counter) => {
-  $counter.addEventListener("click", (e) => {
-    const $minusBtn = e.target.closest(".btn-minus");
-    const $plusBtn = e.target.closest(".btn-plus");
-    const $input = e.target.closest(".counter").querySelector("label .num");
-    // console.log($input.value);
-    if ($minusBtn) {
-      console.log("빼기");
-      $input.value--;
-    } else if ($plusBtn) {
-      console.log("더하기");
-      $input.value++;
-    }
+  console.log($counter);
+  if ($counter) {
     disableCounterBtn($counter);
-  });
+    $counter.addEventListener("click", (e) => {
+      const $minusBtn = e.target.closest(".btn-minus");
+      const $plusBtn = e.target.closest(".btn-plus");
+      const $input = e.target.closest(".counter").querySelector("label .num");
+      // console.log($input.value);
+      if ($minusBtn) {
+        console.log("빼기");
+        $input.value--;
+      } else if ($plusBtn) {
+        console.log("더하기");
+        $input.value++;
+      }
+      disableCounterBtn($counter);
+    });
+  }
 };
 
 const disableCounterBtn = ($counter, max) => {
@@ -37,12 +41,4 @@ const disableCounterBtn = ($counter, max) => {
   } else {
     $minusBtn.disabled = false;
   }
-};
-
-// 카운터 기능추가 - 최초에만 추가되도록 (중복방지)
-export const addCounterFunc = (id, max = 4) => {
-  const $counter = document.getElementById(`counter${id}`);
-  console.log($counter);
-  disableCounterBtn($counter, max);
-  counter($counter);
 };
