@@ -79,22 +79,25 @@ export const fetchCart = async () => {
 //     "is_active": true
 // }
 
-export const fetchPutCart = async (cartItemId, productId, value) => {
+export const fetchPutCart = async (cartItemId, productId, newValue) => {
   const token = getToken();
   try {
     const res = await fetch(url + "/cart/" + cartItemId + "/", {
       method: "PUT",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `JWT ${token}`,
       },
       body: {
         product_id: productId,
-        quantity: value,
+        quantity: newValue,
       },
     });
     if (!res.ok) {
       throw new Error("fetch 실패: cart data 수정");
     }
+    const data = await res.json();
+    return data;
   } catch (err) {
     console.error(err);
   }

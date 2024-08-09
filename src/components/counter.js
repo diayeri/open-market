@@ -5,7 +5,7 @@
 // 3. V 최초로 팝업 만들 때, 카운터 기능추가하기
 // V FIX: 팝업 다시 열릴 때, 이전 버튼 disabled 가 유지되는 오류
 
-export const counter = ($counter) => {
+export const counter = ($counter, funcAfter = () => {}) => {
   // console.log($counter);
   if ($counter) {
     counterFunc($counter);
@@ -29,6 +29,8 @@ export const counter = ($counter) => {
       // console.log("인풋이벤트", e.target.value);
       counterFunc($counter);
     });
+
+    funcAfter();
   }
 };
 
