@@ -14,12 +14,16 @@ const fetchHeaders = { "Content-Type": "application/json" };
 // 2. 삭제/수정 팝업 입력값 적용하기
 // 2-2. 수정 팝업
 // 2-2-1. 완 - 수정 팝업 인풋에 기존 값 불러오기 (value)
-// 2-2-2. 최대, 최소 값일 때 버튼 disabled
+// 2-2-2. 카운터 기능
+// 2-2-3. 최대, 최소 값일 때 버튼 disabled
 // 2-3. 삭제/수정 결과 데이터 전송 (fetch)
 // 2-4. 삭제/수정 데이터 다시 받아오기 (fetch)
 
 // 3. 아이템 리스트 상품금액, 할인, 배송비 합산
 // 3-1. 결제할 가격 나타내기
+
+// 4. 리팩토링
+// 4-1. 상품 정보 불러오는 기존 함수 재활용 가능할지
 
 const $cartList = document.querySelector(".cart-list");
 
@@ -120,7 +124,7 @@ const loadCart = async () => {
     cartLists.results.forEach(async (cart) => {
       const product = await loadProductInfo(cart.product_id);
       // console.log(product, cart);
-      addListUi(product, cart);
+      if (product) addListUi(product, cart);
     });
   }
 };
