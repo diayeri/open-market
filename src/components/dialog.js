@@ -1,4 +1,4 @@
-import { counter } from "../components/counter.js";
+import { counter, disableCounterBtn } from "../components/counter.js";
 
 export const showDialog = (
   id,
@@ -39,7 +39,7 @@ export const showDialog = (
 export const showEditDialog = (li) => {
   const id = li.id;
   const value = li.querySelector(".num").innerText;
-  const $counter = `
+  const $counterUi = `
     <div class="counter" id="counter${id}">
       <button type="button" class="btn-edit btn-minus">
         <img
@@ -59,8 +59,11 @@ export const showEditDialog = (li) => {
       </button>
     </div>
   `;
-  showDialog(`editDialog${id}`, $counter, undefined, "수정", () => {
+  showDialog(`editDialog${id}`, $counterUi, undefined, "수정", () => {
     // 확인버튼 누르면 콜백 함수 작동
   });
-  counter(document.getElementById(`counter${id}`));
+
+  const $counter = document.getElementById(`counter${id}`);
+  disableCounterBtn($counter);
+  counter($counter);
 };

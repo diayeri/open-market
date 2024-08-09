@@ -413,6 +413,9 @@ footer {
     &:last-child {
       border-left-width: 1px;
     }
+    &[disabled] {
+      background-color: var(--gray-lighter);
+    }
   }
   .num {
     display: inline-flex;
