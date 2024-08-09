@@ -41,14 +41,14 @@ const addEditDialogUi = (
   dialogId,
   productId,
   value,
-  maxValue,
+  max,
   onActiveBtnClick = () => {}
 ) => {
   const $editDialog = document.getElementById(dialogId);
   if (!$editDialog) {
     // 최초로 누를 때 - 수정팝업 생성하기
     const $counterUi = `
-    <div class="counter" id="counter${productId}">
+    <div class="counter" id="counter${productId}" data-max="${max}">
       <button type="button" class="btn-edit btn-minus">
         <img
           src="./src/assets/img/icon-minus-line.svg"
@@ -57,7 +57,7 @@ const addEditDialogUi = (
       </button>
       <label for="amount00">
         <span class="sr-only">수량</span>
-        <input type="number" id="amount00" class="num" value="${value}" />
+        <input type="number" id="amount00" class="num" value="${value}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" />
       </label>
       <button type="button" class="btn-edit btn-plus">
         <img
@@ -71,7 +71,7 @@ const addEditDialogUi = (
       onActiveBtnClick();
     });
     const $counter = document.getElementById(`counter${productId}`);
-    counter($counter, maxValue);
+    counter($counter);
   } else {
     // 수정팝업 이미 있을때 - 내용만 바꾸기
     $editDialog.querySelector(".num").value = value;
@@ -92,12 +92,10 @@ export const showEditDialog = async (li) => {
   const productId = li.querySelector(".link-product").id;
   const id = "editDialog";
   const value = li.querySelector(".num").innerText;
-
-  const productInfo = await findProductInfo(productId);
+  const max = li.querySelector(".counter").dataset.max;
   // console.log(productInfo);
-  const maxValue = productInfo.stock;
   // console.log(value);
-  addEditDialogUi(id, productId, value, maxValue, () => {
+  addEditDialogUi(id, productId, value, max, () => {
     // 수정 버튼 -> 장바구니 데이터 변경 -> 받아오기
   });
   document.getElementById(id).showModal();

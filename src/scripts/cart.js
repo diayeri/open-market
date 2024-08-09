@@ -15,7 +15,8 @@ import { showDeleteDialog, showEditDialog } from "../components/dialog.js";
 // 2-2. 수정 팝업
 // 2-2-1. V 수정 팝업 인풋에 기존 값 불러오기 (value)
 // 2-2-2. 카운터 기능
-// 2-2-3. 최대, 최소 값일 때 버튼 disabled
+// 2-2-3. V 최대, 최소 값일 때 버튼 disabled
+// 2-2-3-1. 최대값 불러오기
 // 2-3. 삭제/수정 결과 데이터 전송 (fetch)
 // 2-4. 삭제/수정 데이터 다시 받아오기 (fetch)
 
@@ -57,7 +58,7 @@ const addListUi = (product, cart) => {
         </div>
       </a>
       <div class="w-1/4 text-center ml-auto">
-        <div class="counter">
+        <div class="counter" data-max="${product.stock}">
           <button type="button" class="btn-edit">
             <img
               src="./src/assets/img/icon-minus-line.svg"
