@@ -79,7 +79,7 @@ const addEditDialogUi = (
 };
 
 export const showDeleteDialog = (li) => {
-  const productId = li.id;
+  const productId = li.querySelector(".link-product").id;
   const id = "deleteDialog";
 
   addDialogUi(id, "상품을 삭제하시겠습니까?", undefined, undefined, () => {
@@ -89,15 +89,13 @@ export const showDeleteDialog = (li) => {
 };
 
 export const showEditDialog = async (li) => {
-  const productId = li.id;
-  // const id = `editDialog${productId}`;
+  const productId = li.querySelector(".link-product").id;
   const id = "editDialog";
   const value = li.querySelector(".num").innerText;
 
   const productInfo = await findProductInfo(productId);
-  console.log("productId, productInfo", li, productId, productInfo);
-  // const maxValue = productInfo;
-  const maxValue = 5;
+  // console.log(productInfo);
+  const maxValue = productInfo.stock;
   // console.log(value);
   addEditDialogUi(id, productId, value, maxValue, () => {
     // 수정 버튼 -> 장바구니 데이터 변경 -> 받아오기

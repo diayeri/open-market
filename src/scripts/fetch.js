@@ -13,6 +13,20 @@ export const fetchProducts = async () => {
     console.error(err);
   }
 };
+// productData = {
+//     "product_id": 451,
+//     "created_at": "2024-06-25T01:53:55.798528",
+//     "updated_at": "2024-06-25T01:53:55.798559",
+//     "product_name": "Head 번 라켓",
+//     "image": "https://openmarket.weniv.co.kr/media/products/2024/06/25/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-06-25_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_12.03.25_BuNMbWx.png",
+//     "price": "200,000",
+//     "shipping_method": "PARCEL",
+//     "shipping_fee": 2000,
+//     "stock": 50,
+//     "product_info": "🍊번 라켓 \r\n- 260g, 270g, 280g,300g",
+//     "seller": 312,
+//     "store_name": "return tennis shop"
+// }
 
 export const fetchLogin = async (id, pw, type) => {
   try {
@@ -52,3 +66,10 @@ export const fetchCart = async (token) => {
     console.error(err);
   }
 };
+// cartData = {
+//     "my_cart": 5,
+//     "cart_item_id": 2750,
+//     "product_id": 451,
+//     "quantity": 2,
+//     "is_active": true
+// }

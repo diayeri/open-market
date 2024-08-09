@@ -33,6 +33,9 @@ const addListUi = (product, cart) => {
   product.price = product.price.toLocaleString();
   const shipping =
     product.shipping_method === "PARCEL" ? "택배배송" : "무료배송";
+  // console.log(product, cart);
+
+  const productLink = "#";
 
   const $li = `
     <li id="${cart.cart_item_id}">
@@ -40,17 +43,19 @@ const addListUi = (product, cart) => {
         <span class="sr-only">선택</span>
         <input type="checkbox" name="item" id="item${cart.cart_item_id}" />
       </label>
-      <img
-        src="${product.image}"
-        alt="img"
-        class="thumb"
-      />
-      <div class="wrap-text">
-        <p class="subt">${product.store_name}</p>
-        <h3 class="title">${product.product_name}</h3>
-        <p class="price">${product.price}원</p>
-        <p class="info">${shipping}</p>
-      </div>
+      <a href="${productLink}" class="link-product" id="${product.product_id}">
+        <img
+          src="${product.image}"
+          alt="img"
+          class="thumb"
+        />
+        <div class="wrap-text">
+          <p class="subt">${product.store_name}</p>
+          <h3 class="title">${product.product_name}</h3>
+          <p class="price">${product.price}원</p>
+          <p class="info">${shipping}</p>
+        </div>
+      </a>
       <div class="w-1/4 text-center ml-auto">
         <div class="counter">
           <button type="button" class="btn-edit">
