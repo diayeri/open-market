@@ -4,23 +4,23 @@
 // 2-1. 최대값 가져오기 (상품정보)
 // 3. 최초로 팝업 만들 때, 카운터 기능추가하기
 
-export const counter = ($counter) => {
-  console.log($counter);
+export const counter = ($counter, max) => {
+  // console.log($counter);
   if ($counter) {
-    disableCounterBtn($counter);
+    disableCounterBtn($counter, max);
     $counter.addEventListener("click", (e) => {
       const $minusBtn = e.target.closest(".btn-minus");
       const $plusBtn = e.target.closest(".btn-plus");
       const $input = e.target.closest(".counter").querySelector("label .num");
       // console.log($input.value);
       if ($minusBtn) {
-        console.log("빼기");
+        // console.log("빼기");
         $input.value--;
       } else if ($plusBtn) {
-        console.log("더하기");
+        // console.log("더하기");
         $input.value++;
       }
-      disableCounterBtn($counter);
+      disableCounterBtn($counter, max);
     });
   }
 };

@@ -1,3 +1,4 @@
+import { findProductInfo } from "../scripts/fetch.js";
 import { counter } from "../components/counter.js";
 
 const addDialogUi = (
@@ -40,6 +41,7 @@ const addEditDialogUi = (
   dialogId,
   productId,
   value,
+  maxValue,
   onActiveBtnClick = () => {}
 ) => {
   const $editDialog = document.getElementById(dialogId);
@@ -69,7 +71,7 @@ const addEditDialogUi = (
       onActiveBtnClick();
     });
     const $counter = document.getElementById(`counter${productId}`);
-    counter($counter);
+    counter($counter, maxValue);
   } else {
     // 수정팝업 이미 있을때 - 내용만 바꾸기
     $editDialog.querySelector(".num").value = value;
@@ -86,13 +88,18 @@ export const showDeleteDialog = (li) => {
   document.getElementById(id).showModal();
 };
 
-export const showEditDialog = (li) => {
+export const showEditDialog = async (li) => {
   const productId = li.id;
   // const id = `editDialog${productId}`;
   const id = "editDialog";
-  let value = li.querySelector(".num").innerText;
+  const value = li.querySelector(".num").innerText;
+
+  const productInfo = await findProductInfo(productId);
+  console.log("productId, productInfo", li, productId, productInfo);
+  // const maxValue = productInfo;
+  const maxValue = 5;
   // console.log(value);
-  addEditDialogUi(id, productId, value, () => {
+  addEditDialogUi(id, productId, value, maxValue, () => {
     // 수정 버튼 -> 장바구니 데이터 변경 -> 받아오기
   });
   document.getElementById(id).showModal();

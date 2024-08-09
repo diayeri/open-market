@@ -1,4 +1,4 @@
-import { fetchProducts } from "./fetch.js";
+import { fetchCart, findProductInfo } from "./fetch.js";
 import { showDeleteDialog, showEditDialog } from "../components/dialog.js";
 const url = "https://openmarket.weniv.co.kr";
 const fetchHeaders = { "Content-Type": "application/json" };
@@ -94,25 +94,11 @@ const cartState = (state) => {
   }
 };
 
-// 상품 아이디로 상품 정보 불러오기
-const loadProductInfo = async (productId) => {
-  const products = await fetchProducts();
-  const productInfo = products.results?.find((e) => e.product_id === productId);
-  // console.log(productInfo);
-  return productInfo;
-};
-
 // 장바구니 불러오기
 const loadCart = async () => {
   const token = localStorage.getItem("login-token");
-  const res = await fetch(url + "/cart/", {
-    method: "GET",
-    headers: {
-      Authorization: `JWT ${token}`,
-    },
-  });
-  const cartLists = await res.json();
-  // console.log(cartLists.results);
+  const cartLists = await fetchCart(token);
+  // console.log(cartLists);
 
   if (cartLists.results.length === 0) {
     cartState(0);
@@ -121,7 +107,7 @@ const loadCart = async () => {
     cartState(1);
 
     cartLists.results.forEach(async (cart) => {
-      const product = await loadProductInfo(cart.product_id);
+      const product = await findProductInfo(cart.product_id);
       // console.log(product, cart);
       if (product) addListUi(product, cart);
     });
