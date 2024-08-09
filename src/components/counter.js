@@ -1,3 +1,9 @@
+// 카운터 기능
+// 1. 버튼을 누르면 숫자가 변한다
+// 2. 최대, 최소값에 도달하면 버튼이 막힌다
+// 2-1. 최대값 가져오기 (상품정보)
+// 3. 최초로 팝업 만들 때, 카운터 기능추가하기
+
 export const counter = ($counter) => {
   $counter.addEventListener("click", (e) => {
     const $minusBtn = e.target.closest(".btn-minus");
@@ -5,21 +11,21 @@ export const counter = ($counter) => {
     const $input = e.target.closest(".counter").querySelector("label .num");
     // console.log($input.value);
     if ($minusBtn) {
-      // console.log("빼기");
+      console.log("빼기");
       $input.value--;
     } else if ($plusBtn) {
-      // console.log("더하기");
+      console.log("더하기");
       $input.value++;
     }
     disableCounterBtn($counter);
   });
 };
 
-export const disableCounterBtn = ($counter, max = 3) => {
+const disableCounterBtn = ($counter, max) => {
   const $minusBtn = $counter.querySelector(".btn-minus");
   const $plusBtn = $counter.querySelector(".btn-plus");
   const $input = $counter.querySelector("label .num");
-  console.log($input);
+  // console.log($input);
 
   // 최소값 1, 최대값 max
   if ($input.value <= 1) {
@@ -31,4 +37,12 @@ export const disableCounterBtn = ($counter, max = 3) => {
   } else {
     $minusBtn.disabled = false;
   }
+};
+
+// 카운터 기능추가 - 최초에만 추가되도록 (중복방지)
+export const addCounterFunc = (id, max = 4) => {
+  const $counter = document.getElementById(`counter${id}`);
+  console.log($counter);
+  disableCounterBtn($counter, max);
+  counter($counter);
 };

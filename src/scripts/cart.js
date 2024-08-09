@@ -1,4 +1,4 @@
-import { showDialog, showEditDialog } from "../components/dialog.js";
+import { showDeleteDialog, showEditDialog } from "../components/dialog.js";
 const url = "https://openmarket.weniv.co.kr";
 const fetchHeaders = { "Content-Type": "application/json" };
 
@@ -135,23 +135,15 @@ $cartList.addEventListener("click", (e) => {
   // console.log(e.target);
   const clickDelBtn = e.target.closest(".btn-del");
   const clickEditBtn = e.target.closest(".btn-edit");
+  const $li = e.target.closest("li");
 
   // 리스트 삭제버튼 누르면
   if (clickDelBtn) {
-    showDialog(
-      "deleteListDialog",
-      "상품을 삭제하시겠습니까?",
-      undefined,
-      undefined,
-      () => {
-        // 확인버튼 누르면 콜백 함수 작동
-      }
-    );
+    showDeleteDialog($li);
   }
 
   // 리스트 수정버튼 누르면
   if (clickEditBtn) {
-    const $li = e.target.closest("li");
     // console.log($li);
     showEditDialog($li);
   }
