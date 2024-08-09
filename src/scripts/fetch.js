@@ -13,6 +13,7 @@ export const fetchProducts = async () => {
     console.error(err);
   }
 };
+export const fetchProductsData = await fetchProducts();
 // productData = {
 //     "product_id": 451,
 //     "created_at": "2024-06-25T01:53:55.798528",
@@ -73,3 +74,46 @@ export const fetchCart = async (token) => {
 //     "quantity": 2,
 //     "is_active": true
 // }
+
+export const fetchPutCart = async (cartItemId, productId, value, token) => {
+  try {
+    const res = await fetch(url + "/cart/" + cartItemId + "/", {
+      method: "PUT",
+      headers: {
+        Authorization: `JWT ${token}`,
+      },
+      body: {
+        product_id: productId,
+        quantity: value,
+      },
+    });
+    if (!res.ok) {
+      throw new Error("fetch 실패: cart data 수정");
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const fetchDeleteCart = async (cartItemId, productId) => {};
+
+// export const editCartItem = async (cartItemId, productId, value, token) => {
+//   try {
+//     const res = await fetch(url + "/cart/" + cartItemId + "/", {
+//       method: "PUT",
+//       headers: {
+//         Authorization: `JWT ${token}`,
+//       },
+//       body: {
+//         product_id: productId,
+//         quantity: value,
+//       },
+//     });
+//     if (!res.ok) {
+//       throw new Error("fetch 실패: cart data 수정");
+//     }
+//     loadCart();
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };

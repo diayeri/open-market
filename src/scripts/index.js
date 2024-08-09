@@ -1,4 +1,4 @@
-import { fetchProducts } from "./fetch.js";
+import { fetchProductsData } from "./fetch.js";
 
 // 상품목록 UI
 const addListUi = (e) => {
@@ -27,8 +27,8 @@ const addListUi = (e) => {
 };
 
 // 상품목록 불러오기
-const loadProducts = async () => {
-  const products = await fetchProducts();
+const loadProducts = () => {
+  const products = fetchProductsData;
 
   products.results.forEach((e) => {
     addListUi(e);
