@@ -19,7 +19,7 @@ import { showDeleteDialog, showEditDialog } from "../components/dialog.js";
 // 2-2-3. V 최대, 최소 값일 때 버튼 disabled
 // 2-2-3-1. V 최대값 불러오기
 // 2-3. 삭제/수정 결과 데이터 전송 (fetch)
-// 2-4. 삭제/수정 데이터 다시 받아오기 (fetch)
+// 2-4. 삭제/수정 데이터 다시 받아오기 (fetch) -> 새로고침
 
 // 3. 아이템 리스트 상품금액, 할인, 배송비 합산
 // 3-1. 결제할 가격 나타내기

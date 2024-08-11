@@ -118,7 +118,7 @@ const editCartItem = (oldValue) => {
       // console.log(cartItemId, productId, newValue);
       if (oldValue !== newValue) {
         await fetchPutCart(cartItemId, productId, newValue);
-        // loadCart();
+        location.reload(true);
       }
       // console.log(data);
     }
