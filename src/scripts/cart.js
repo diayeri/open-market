@@ -45,7 +45,9 @@ const addListUi = (product, cart) => {
   }" data-product="${product.product_id}">
       <label for="item${cart.cart_item_id}" class="wrap-checkbox">
         <span class="sr-only">선택</span>
-        <input type="checkbox" name="item" id="item${cart.cart_item_id}" />
+        <input type="checkbox" name="item" id="item${
+          cart.cart_item_id
+        }" class="checkbox" />
       </label>
       <a href="${productLink}" class="link-product" id="${product.product_id}">
         <img
@@ -183,3 +185,22 @@ const cartAddUp = async (productsListAll) => {
     Number(deliveryFee.innerText.replace(/,/g, ""))
   ).toLocaleString();
 };
+
+// 체크박스 모두 선택하기
+const selectAllCheckbox = document.querySelector(".cart-table .thead #itemAll");
+selectAllCheckbox.addEventListener("click", (e) => {
+  // checkboxes 가 밖에서 지정되면 왜 작동하지 않을까?
+  const checkboxes = document.querySelectorAll(".cart-table .tbody .checkbox");
+  // console.log(checkboxes);
+  if (e.currentTarget.checked) {
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = true;
+    });
+  } else {
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+  }
+});
+
+// TODO: 체크박스 하나라도 선택이 풀리면 전체선택도 풀리도록
