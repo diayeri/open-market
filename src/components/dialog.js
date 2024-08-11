@@ -1,12 +1,5 @@
-import {
-  fetchCart,
-  fetchPutCart,
-  fetchDeleteCart,
-  getToken,
-} from "../scripts/fetch.js";
+import { fetchPutCart, fetchDeleteCart } from "../scripts/fetch.js";
 import { counter, counterFunc } from "../components/counter.js";
-import { findProductInfo } from "../scripts/product.js";
-// import { loadCart } from "../scripts/cart.js";
 
 const $dialogWrapper = document.querySelector("#dialogWrapper");
 

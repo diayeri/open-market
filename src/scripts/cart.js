@@ -21,8 +21,8 @@ import { showDeleteDialog, showEditDialog } from "../components/dialog.js";
 // 2-3. V 삭제/수정 결과 데이터 전송 (fetch)
 // 2-4. V 삭제/수정 데이터 다시 받아오기 (fetch) -> 새로고침
 
-// 3. 아이템 리스트 상품금액, 할인, 배송비 합산
-// 3-1. 결제할 가격 나타내기
+// 3. V 아이템 리스트 상품금액, 할인, 배송비 합산
+// 3-1. V 결제할 가격 나타내기
 
 // 4. 리팩토링
 // 4-1. V 상품 정보 불러오는 기존 함수 재활용 가능할지
@@ -94,7 +94,7 @@ const addListUi = (product, cart) => {
 };
 
 // 장바구니 상태에 따른 UI
-const cartState = (state) => {
+const hasItemInCart = (state) => {
   if (state) {
     const $emptyOff = document.querySelectorAll(".empty-off");
     $emptyOff.forEach((i) => i.classList.remove("!hidden"));
@@ -115,18 +115,18 @@ export const loadCart = async () => {
   clearCart();
   if (getToken()) {
     const cartLists = await fetchCart();
-    // console.log(cartLists);
+    console.log(cartLists.results);
 
     if (cartLists.results.length === 0) {
-      cartState(0);
+      hasItemInCart(false);
       return;
     } else {
-      cartState(1);
+      hasItemInCart(true);
 
       const productsList = await Promise.all(
         cartLists.results.map(async (cart) => {
           const product = await findProductInfo(cart.product_id);
-          // console.log(product, cart);
+          console.log(product, cart);
           if (product) {
             addListUi(product, cart);
             return product;

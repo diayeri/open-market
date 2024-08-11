@@ -2,7 +2,7 @@ import { fetchLogin, setToken, getToken } from "./fetch.js";
 
 const $buyerLoginForm = document.querySelector("#buyerLoginForm");
 const $buyerLoginTab = document.querySelector("#buyerLoginTab");
-const $buyerLoginBtn = document.querySelector("#buyerLoginBtn");
+// const $buyerLoginBtn = document.querySelector("#buyerLoginBtn");
 const $buyerId = document.querySelector("#buyerId");
 const $buyerPassword = document.querySelector("#buyerPassword");
 const $buyerLoginErr = document.querySelector("#buyerLoginErr");
