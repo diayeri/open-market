@@ -34,24 +34,17 @@ export const fetchProductsData = await fetchProducts();
 // }
 
 export const fetchLogin = async (id, pw, type) => {
-  try {
-    const res = await fetch(url + "/accounts/login/", {
-      method: "POST",
-      headers: fetchHeaders,
-      body: JSON.stringify({
-        username: id,
-        password: pw,
-        login_type: type,
-      }),
-    });
-    if (!res.ok) {
-      throw new Error("fetch 실패: login data");
-    }
-    const data = await res.json();
-    return { data: data, ok: res.ok };
-  } catch (err) {
-    console.error(err);
-  }
+  const res = await fetch(url + "/accounts/login/", {
+    method: "POST",
+    headers: fetchHeaders,
+    body: JSON.stringify({
+      username: id,
+      password: pw,
+      login_type: type,
+    }),
+  });
+  const data = await res.json();
+  return { data: data, ok: res.ok };
 };
 
 export const fetchCart = async () => {
