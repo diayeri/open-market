@@ -188,7 +188,7 @@ const cartAddUp = async (productsListAll) => {
 
 // 체크박스 모두 선택하기
 const selectAllCheckbox = document.querySelector(".cart-table .thead #itemAll");
-selectAllCheckbox.addEventListener("click", (e) => {
+selectAllCheckbox.addEventListener("change", (e) => {
   // checkboxes 가 밖에서 지정되면 왜 작동하지 않을까?
   const checkboxes = document.querySelectorAll(".cart-table .tbody .checkbox");
   // console.log(checkboxes);
@@ -203,4 +203,9 @@ selectAllCheckbox.addEventListener("click", (e) => {
   }
 });
 
-// TODO: 체크박스 하나라도 선택이 풀리면 전체선택도 풀리도록
+// 체크박스 하나라도 선택이 풀리면 전체선택도 풀리도록
+$cartList.addEventListener("change", (e) => {
+  if (e.target.classList.contains("checkbox") && !e.target.checked) {
+    selectAllCheckbox.checked = false;
+  }
+});
