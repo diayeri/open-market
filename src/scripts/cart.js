@@ -1,4 +1,4 @@
-import { fetchCart } from "./fetch.js";
+import { fetchCart, getToken } from "./fetch.js";
 import { findProductInfo } from "../scripts/product.js";
 import { showDeleteDialog, showEditDialog } from "../components/dialog.js";
 
@@ -111,20 +111,25 @@ const clearCart = () => {
 // 장바구니 불러오기
 export const loadCart = async () => {
   clearCart();
-  const cartLists = await fetchCart();
-  // console.log(cartLists);
+  if (getToken()) {
+    const cartLists = await fetchCart();
+    // console.log(cartLists);
 
-  if (cartLists.results.length === 0) {
-    cartState(0);
-    return;
+    if (cartLists.results.length === 0) {
+      cartState(0);
+      return;
+    } else {
+      cartState(1);
+
+      cartLists.results.forEach(async (cart) => {
+        const product = await findProductInfo(cart.product_id);
+        // console.log(product, cart);
+        if (product) addListUi(product, cart);
+      });
+    }
   } else {
-    cartState(1);
-
-    cartLists.results.forEach(async (cart) => {
-      const product = await findProductInfo(cart.product_id);
-      // console.log(product, cart);
-      if (product) addListUi(product, cart);
-    });
+    const logoutText = document.querySelector(".cart-logout");
+    logoutText.classList.remove("!hidden");
   }
 };
 loadCart();
