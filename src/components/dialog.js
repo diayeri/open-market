@@ -138,8 +138,10 @@ export const showDeleteDialog = (li) => {
     "상품을 삭제하시겠습니까?",
     undefined,
     undefined,
-    () => {
+    async () => {
       // 확인 버튼 -> 장바구니 데이터 삭제 -> 받아오기
+      await fetchDeleteCart(cartItemId);
+      location.reload(true);
     }
   );
   document.getElementById(id).showModal();

@@ -105,4 +105,17 @@ export const fetchPutCart = async (cartItemId, productId, newValue) => {
   }
 };
 
-export const fetchDeleteCart = async (cartItemId, productId) => {};
+export const fetchDeleteCart = async (cartItemId) => {
+  const token = getToken();
+  try {
+    const res = await fetch(`${url}/cart/${cartItemId}/`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `JWT ${token}`,
+      },
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
