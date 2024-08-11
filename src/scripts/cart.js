@@ -18,8 +18,8 @@ import { showDeleteDialog, showEditDialog } from "../components/dialog.js";
 // 2-2-2. V 카운터 기능
 // 2-2-3. V 최대, 최소 값일 때 버튼 disabled
 // 2-2-3-1. V 최대값 불러오기
-// 2-3. 삭제/수정 결과 데이터 전송 (fetch)
-// 2-4. 삭제/수정 데이터 다시 받아오기 (fetch) -> 새로고침
+// 2-3. V 삭제/수정 결과 데이터 전송 (fetch)
+// 2-4. V 삭제/수정 데이터 다시 받아오기 (fetch) -> 새로고침
 
 // 3. 아이템 리스트 상품금액, 할인, 배송비 합산
 // 3-1. 결제할 가격 나타내기
@@ -32,7 +32,7 @@ const $cartList = document.querySelector(".cart-list");
 const addListUi = (product, cart) => {
   const quantity = cart.quantity;
   const priceSum = (product.price * quantity).toLocaleString();
-  console.log(product.price, quantity);
+  // console.log(product.price, quantity);
   const shipping =
     product.shipping_method === "PARCEL" ? "택배배송" : "무료배송";
   // console.log(product, cart);
@@ -121,11 +121,17 @@ export const loadCart = async () => {
     } else {
       cartState(1);
 
-      cartLists.results.forEach(async (cart) => {
-        const product = await findProductInfo(cart.product_id);
-        // console.log(product, cart);
-        if (product) addListUi(product, cart);
-      });
+      const productsList = await Promise.all(
+        cartLists.results.map(async (cart) => {
+          const product = await findProductInfo(cart.product_id);
+          // console.log(product, cart);
+          if (product) {
+            addListUi(product, cart);
+            return product;
+          }
+        })
+      );
+      cartAddUp(productsList);
     }
   } else {
     const logoutText = document.querySelector(".cart-logout");
@@ -152,3 +158,28 @@ $cartList.addEventListener("click", (e) => {
     showEditDialog($li);
   }
 });
+
+const addUp = (arr, key) => {
+  return arr.reduce((a, c) => a + c[key], 0);
+};
+
+// 합산 테이블 (하단)
+const cartAddUp = async (productsListAll) => {
+  const $tfooter = document.querySelector(".cart-table .tfooter");
+  const totalPrice = $tfooter.querySelector("#totalPrice");
+  const totalDiscount = $tfooter.querySelector("#totalDiscount");
+  const deliveryFee = $tfooter.querySelector("#deliveryFee");
+  const totalPayment = $tfooter.querySelector("#totalPayment");
+
+  const productsList = productsListAll.filter(
+    (i) => i !== null && i !== undefined
+  );
+  // console.log(productsList);
+
+  totalPrice.innerText = addUp(productsList, "price").toLocaleString();
+  deliveryFee.innerText = addUp(productsList, "shipping_fee").toLocaleString();
+  totalPayment.innerText = (
+    Number(totalPrice.innerText.replace(/,/g, "")) +
+    Number(deliveryFee.innerText.replace(/,/g, ""))
+  ).toLocaleString();
+};
