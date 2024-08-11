@@ -3,6 +3,7 @@ const fetchHeaders = { "Content-Type": "application/json" };
 
 export const getToken = () => localStorage.getItem("login-token");
 export const setToken = (token) => localStorage.setItem("login-token", token);
+export const removeToken = () => localStorage.removeItem("login-token");
 
 export const fetchProducts = async () => {
   try {

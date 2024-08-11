@@ -462,3 +462,33 @@ dialog {
     display: none;
   }
 }
+
+#mypageBtnWrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+#mypageDropdown {
+  display: none;
+  position: absolute;
+  top: 70px;
+  flex-direction: column;
+  width: 130px;
+  padding: 10px;
+  gap: 8px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: var(--shadow-dropdown);
+  .btn {
+    padding: 10px;
+    text-align: center;
+    border-color: transparent;
+    &:hover {
+      border-color: var(--gray);
+    }
+  }
+}
+.show-dropdown + #mypageDropdown {
+  display: flex;
+}

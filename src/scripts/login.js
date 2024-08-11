@@ -1,4 +1,4 @@
-import { fetchLogin, setToken } from "./fetch.js";
+import { fetchLogin, setToken, getToken } from "./fetch.js";
 
 const $buyerLoginForm = document.querySelector("#buyerLoginForm");
 const $buyerLoginTab = document.querySelector("#buyerLoginTab");
