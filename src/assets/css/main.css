@@ -20,6 +20,9 @@
   --shadow-header: 0 4px 5px 0 rgba(0, 0, 0, 0.1);
   --shadow-dropdown: 0 0 6px 0 rgba(0, 0, 0, 0.25);
 }
+body {
+  min-width: 1400px;
+}
 main {
   margin: 0 auto;
 }
@@ -55,8 +58,6 @@ input::-webkit-inner-spin-button {
   font-weight: bold;
   min-width: 220px;
   padding: 19px;
-}
-.btn-tab {
 }
 .btn-del {
   position: absolute;
