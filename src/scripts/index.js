@@ -7,14 +7,14 @@ const addListUi = (e) => {
   const $ul = document.querySelector(".product-list");
   const $li = `
     <li>
-      <a href="/product${e.product_id}">
+      <a href="/product${e.id}">
         <img
           src="${e.image}"
-          alt="${e.product_name}"
+          alt="${e.name}"
         />
         <div class="wrap-text">
-          <p class="subt">${e.store_name}</p>
-          <h3 class="title">${e.product_name}</h3>
+          <p class="subt">${e.seller.name}</p>
+          <h3 class="title">${e.name}</h3>
           <div class="price">
             <p>${e.price}</p>
             <span>원</span>
