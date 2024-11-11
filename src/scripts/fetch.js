@@ -1,4 +1,4 @@
-const url = "https://openmarket.weniv.co.kr";
+const url = "https://estapi.openmarket.weniv.co.kr";
 const fetchHeaders = { "Content-Type": "application/json" };
 
 export const getToken = () => localStorage.getItem("login-token");
